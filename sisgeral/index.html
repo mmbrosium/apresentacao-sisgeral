@@ -194,16 +194,12 @@
 
           <div class="card param-block" id="boleto-block-container" style="display: none;">
             <h3>Parâmetros de Boleto</h3>
-            <div class="param-grid">
-              <div class="form-group">
-                <label for="boleto-mes">Mês de referência (mm/aaaa)</label>
-                <input type="text" id="boleto-mes" placeholder="Ex: 10/2026" maxlength="7">
-              </div>
-            </div>
-            <div class="param-envio">
-              <label class="param-envio-title">Forma de Envio</label>
+            <div class="boleto-linha" id="boleto-linhas">
+              <label class="boleto-lbl" for="boleto-mes">Mês</label>
+              <span class="boleto-item"><input type="text" class="boleto-mes" id="boleto-mes" placeholder="mm/aaaa" maxlength="7"></span>
               <label class="chk-inline"><input type="checkbox" id="boleto-envio-sms"> SMS</label>
               <label class="chk-inline"><input type="checkbox" id="boleto-envio-email"> E-mail</label>
+              <button type="button" id="btn-add-boleto" class="btn-secondary" style="font-size: 0.7rem; padding: 0.2rem 0.5rem;" title="Mais um mês">+ Acrescentar boleto</button>
             </div>
           </div>
 

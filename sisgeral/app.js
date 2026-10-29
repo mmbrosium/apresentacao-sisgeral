@@ -276,15 +276,22 @@
         }
 
         if (proc.category === "boleto") {
-          const mesVal = boletoData && boletoData.mesRef && boletoData.mesRef.trim() ? boletoData.mesRef.trim() : "[mm/aaaa]";
+          // Vários meses: "10/2026 e também 11/2026"
+          const meses = (boletoData && boletoData.meses && boletoData.meses.length) ? boletoData.meses
+            : (boletoData && boletoData.mesRef && boletoData.mesRef.trim() ? [boletoData.mesRef.trim()] : []);
+          const mesVal = meses.length ? meses.join(" e também ") : "[mm/aaaa]";
           t = safeReplace(t, "{boleto}", mesVal);
-          const envLines = [];
+          // Envio: uma linha por canal, no fim do texto
+          const envLines = [], canais = [];
           if (boletoData && boletoData.envio) {
-            if (boletoData.envio.sms) envLines.push("Enviado via SMS de cadastro");
-            if (boletoData.envio.email) envLines.push("Enviado via e-mail de cadastro");
+            if (boletoData.envio.sms) { envLines.push("SMS de cadastro enviado com sucesso"); canais.push("SMS"); }
+            if (boletoData.envio.email) { envLines.push("A solicitação de envio de e-mail foi cadastrada com sucesso"); canais.push("e-mail"); }
           }
+          if (canais.length) t = t.replace(/\[SMS\/e-mail\]/gi, canais.join(" e "));
+          const temChave = /\{el\}|\{envio_linhas\}/i.test(t);
           t = safeReplace(t, "{el}", envLines.join("\n"));
           t = safeReplace(t, "{envio_linhas}", envLines.join("\n"));
+          if (!temChave && envLines.length) t = t.trim() + "\n" + envLines.join("\n");
           t = t.replace(/[ \t]+\n/g, "\n").replace(/\n{3,}/g, "\n\n").trim();
         }
 
@@ -307,7 +314,7 @@
             linhas.push(`Informado que o procedimento de ${cob1} ainda encontra-se em carência e deverá aguardar após o prazo de [ ] dias`);
           }
           if (!cobre) {
-            linhas.push(`\nOrientado(a) a entrar em contato diretamente no site da "https://www.amildental.com.br/" para conferir os planos de seu interesse e retornar o contato solicitando migração de plano`);
+            linhas.push(`\nOrientado(a) a entrar em contato diretamente no site da "https://www.operadora.com.br/" para conferir os planos de seu interesse e retornar o contato solicitando migração de plano`);
           }
           t = (t.trim() + "\n" + linhas.join("\n")).trim();
         }
@@ -961,8 +968,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ===== Aba Versões / Changelog =====
-  const APP_VERSION = "3.25";
+  const APP_VERSION = "3.26";
   const CHANGELOG = [
+    { v: "3.26", d: "29/10/2026", items: ["Boleto: parâmetros numa linha só (mês, SMS, e-mail) e botão \"Acrescentar boleto\" pra mais de um mês — no prontuário vira \"10/2026 e também 11/2026\"", "Boleto: o envio sai em linhas próprias no fim do texto — \"SMS de cadastro enviado com sucesso\" e \"A solicitação de envio de e-mail foi cadastrada com sucesso\", uma embaixo da outra; o [SMS/e-mail] do texto vira o canal escolhido"] },
     { v: "3.25", d: "26/10/2026", items: ["Importação de TXT passou a preservar os procedimentos usados (não vira mais tudo \"Histórico Importado\") e casa os nomes com o catálogo para contarem no Top do painel", "Dark Mode: contraste corrigido nos elementos de fundo ciano (menu ⋮, janela ativa do painel, atalho Hoje/Mês inteiro e botões primários) — texto escuro sobre o ciano, legível"] },
     { v: "3.24", d: "26/10/2026", items: ["Hotfix: importação de relatório TXT voltou a funcionar — o leitor passou a aceitar a data com vírgula (\"DD/MM/AAAA, HH:MM:SS\") que o próprio sistema exporta; uma data estranha não derruba mais o import inteiro e o cabeçalho deixou de virar registro fantasma"] },
     { v: "3.23", d: "24/10/2026", items: ["Prontuário: do 2º procedimento em diante vira \"Beneficiário(a) também entrou...\" — sem repetir o nome (nem a chave quando vazio)", "Ticker: passou a mostrar produtividade (atendimentos no mês, mais acionado, maior/menor dia de fluxo, pico e menor horário) — sem duplicar o que já está no cabeçalho", "Painel: novos indicadores Maior dia, Menor dia, Pico de horário e Hora + fraca"] },
@@ -1613,6 +1621,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function getBoletoData() {
     return {
       mesRef: document.getElementById('boleto-mes')?.value || "",
+      meses: [...document.querySelectorAll('.boleto-mes')].map(i => i.value.trim()).filter(Boolean),
       envio: {
         sms: document.getElementById('boleto-envio-sms')?.checked || false,
         email: document.getElementById('boleto-envio-email')?.checked || false
@@ -2224,11 +2233,22 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // Máscara automática mm/aaaa no mês do boleto (insere a barra sozinha)
-  document.getElementById('boleto-mes')?.addEventListener('input', (e) => {
+  document.getElementById('boleto-linhas')?.addEventListener('input', (e) => {
+    if (!e.target.classList.contains('boleto-mes')) return;
     let d = e.target.value.replace(/\D/g, '').slice(0, 6);
     if (d.length > 2) d = d.slice(0, 2) + '/' + d.slice(2);
     e.target.value = d;
     recompileProntuario();
+  });
+  // Mais um mês de boleto na mesma linha (com × pra tirar)
+  document.getElementById('btn-add-boleto')?.addEventListener('click', () => {
+    const linha = document.getElementById('boleto-linhas'); if (!linha) return;
+    const item = document.createElement('span'); item.className = 'boleto-item';
+    item.innerHTML = '<input type="text" class="boleto-mes" placeholder="mm/aaaa" maxlength="7"><button type="button" class="boleto-x" title="Tirar este mês">×</button>';
+    item.querySelector('.boleto-x').addEventListener('click', () => { item.remove(); recompileProntuario(); });
+    const ultimo = [...linha.querySelectorAll('.boleto-item')].pop();
+    ultimo ? ultimo.insertAdjacentElement('afterend', item) : linha.prepend(item);
+    item.querySelector('input').focus();
   });
 
   document.getElementById('prontuario-textarea')?.addEventListener('input', () => { isManualEdited = true; });
@@ -2280,6 +2300,7 @@ document.addEventListener('DOMContentLoaded', () => {
     ['rede-envio-sms', 'rede-envio-email', 'boleto-envio-sms', 'boleto-envio-email'].forEach(id => {
       const el = document.getElementById(id); if (el) el.checked = false;
     });
+    document.querySelectorAll('#boleto-linhas .boleto-item').forEach((it, i) => { if (i > 0) it.remove(); });
     const esp = document.getElementById('rede-especialidade'); if (esp) esp.value = '';
     const espS = document.getElementById('rede-esp-search'); if (espS) espS.value = '';
     const espR = document.getElementById('rede-esp-results'); if (espR) { espR.innerHTML = ''; espR.style.display = 'none'; }
