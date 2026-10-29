@@ -128,11 +128,11 @@ Nada disso depende de TI nem de compra. O custo é tempo de revisão. O ganho é
 
 ## Abrir e testar {Testar}
 
-O sistema não está nesta página: fica num repositório privado, e a versão entregue em pasta traz a pasta **sisgeral** ao lado desta apresentação, com um atalho **ABRIR - SisGeral** pra abrir sem instalar nada e sem internet. Ele abre com o catálogo completo e o histórico vazio; o que você registrar fica só no navegador da sua máquina, e some com o **Apagar tudo** das configurações.
+A versão que abre aqui é de **homologação**: o mesmo sistema, com o catálogo reduzido a 24 procedimentos de exemplo, o ABC só com os nomes das especialidades e o diretório VDN com números de referência. Serve pra clicar, marcar procedimento, montar prontuário e ver o painel, sem expor nada da operação. Nada precisa ser instalado; o que você registrar fica só no seu navegador, e some com o **Apagar tudo** das configurações.
 
-<p><a class="abrir-sis" href="https://github.com/mmbrosium/sisgeral" target="_blank" rel="noopener">Repositório do SisGeral (privado) →</a></p>
+<p><a class="abrir-sis" href="sisgeral/index.html" target="_blank" rel="noopener">Abrir o SisGeral (homologação) →</a></p>
 
-Pra levar o sistema pra outra máquina, copie a pasta **sisgeral** inteira: são três arquivos (\`index.html\`, \`styles.css\`, \`app.js\`) e o README.
+A versão completa, com os 98 procedimentos, o ABC com códigos e o VDN real, vai na pasta entregue à gestão e fica num repositório privado.
 
 ## Contato
 

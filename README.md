@@ -6,4 +6,4 @@ Apresentação do SisGeral, gerenciador de atendimento de SAC num arquivo HTML, 
 
 **Ler no computador:** baixe o repositório (Code > Download ZIP), descompacte e abra `index.html`. Não precisa de internet.
 
-O código do sistema fica em repositório separado e privado: https://github.com/mmbrosium/sisgeral. O pacote entregue em pasta traz o sistema junto, com atalhos e o `LEIA-ME.txt`.
+A pasta `sisgeral/` traz uma versão de **homologação** do sistema (catálogo reduzido, ABC sem códigos, VDN com números de referência), pra testar ao vivo. A versão completa fica em repositório privado: https://github.com/mmbrosium/sisgeral.

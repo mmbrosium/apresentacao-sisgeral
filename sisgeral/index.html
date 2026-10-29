@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SisGeral · homologação</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- TOPO FIXO -->
+  <header class="sticky-header">
+    <div class="header-top">
+      <div class="header-brand">
+        <h1>SisGeral</h1>
+        <p>Gerenciador de Atendimento de SAC · HOMOLOGAÇÃO</p>
+      </div>
+      <div class="header-tools">
+        <span id="live-clock" class="clock-display">00:00:00</span>
+        <button id="btn-theme-toggle" class="btn-theme-toggle" title="Alternar Tema">🌙</button>
+        <button id="btn-toggle-settings" class="btn-settings-icon" aria-expanded="false" title="Configurações">⚙️</button>
+      </div>
+    </div>
+
+    <!-- TICKER (painel rolante) -->
+    <div id="ticker-bar" class="ticker-bar">
+      <div id="ticker-track" class="ticker-track"></div>
+    </div>
+
+    <!-- ABAS DE NAVEGAÇÃO -->
+    <nav class="tab-list" role="tablist">
+      <button role="tab" id="tab-new" aria-controls="panel-new" aria-selected="true">Novo Atendimento</button>
+      <button role="tab" id="tab-history" aria-controls="panel-history" aria-selected="false">Histórico & Arquivo</button>
+      <button role="tab" id="tab-calendar" aria-controls="panel-calendar" aria-selected="false">Calendário & Clima</button>
+      <button role="tab" id="tab-dashboard" aria-controls="panel-dashboard" aria-selected="false">Painel de Produtividade</button>
+      <button role="tab" id="tab-abcvdn" aria-controls="panel-abcvdn" aria-selected="false">ABC & VDN</button>
+      <button role="tab" id="tab-versoes" aria-controls="panel-versoes" aria-selected="false">Versões</button>
+    </nav>
+  </header>
+
+  <!-- FAIXA DE AVISO DE BACKUP -->
+  <div id="backup-warning-banner" class="backup-warning-banner hidden">
+    <span>⚠️ Você não faz backup dos dados há mais de 7 dias. É recomendável exportar seus registros.</span>
+    <button id="btn-quick-backup" class="btn-accent" style="font-size: 0.7rem; padding: 0.15rem 0.4rem;">Fazer Backup</button>
+  </div>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <main>
+    <!-- PAINEL DE CONFIGURAÇÕES FLUTUANTE -->
+    <div id="settings-panel" class="settings-panel">
+      <div class="settings-header">
+        <h2>Configurações do Sistema</h2>
+        <span class="settings-badge">SisGeral 3.3</span>
+      </div>
+      <div class="form-row" style="margin-bottom: 0.5rem;">
+        <div class="form-group">
+          <label for="setting-attendant">Nome Padrão do Atendente</label>
+          <input type="text" id="setting-attendant">
+        </div>
+        <div class="form-group">
+          <label for="setting-retention">Retenção de Histórico (Dias)</label>
+          <select id="setting-retention">
+            <option value="30">30 dias</option>
+            <option value="90">90 dias</option>
+            <option value="180">180 dias</option>
+            <option value="365">1 ano</option>
+            <option value="0">Nunca apagar</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row" style="margin-bottom: 0.5rem;">
+        <div class="form-group">
+          <label for="setting-theme">Tema Visual Padrão</label>
+          <select id="setting-theme">
+            <option value="auto">Automático (Sistema)</option>
+            <option value="light">Claro</option>
+            <option value="dark">Escuro</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Gerenciamento de Dados (JSON)</label>
+          <div style="display: flex; gap: 0.4rem; margin-top: 0.2rem;">
+            <button id="btn-export-json" class="btn-secondary" style="font-size: 0.7rem;">Exportar Backup</button>
+            <label class="btn-secondary" style="font-size: 0.7rem; display: inline-flex; align-items: center; cursor: pointer;">
+              Importar Backup <input type="file" id="input-import-json" accept=".json" style="display: none;">
+            </label>
+          </div>
+        </div>
+      </div>
+      <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-light); padding-top: 0.5rem;">
+        <div>
+          <span id="storage-usage-meter" class="hint">Uso do localStorage: calculando...</span>
+        </div>
+        <div style="display: flex; gap: 0.4rem;">
+          <button id="btn-undo-action" class="btn-secondary" style="font-size: 0.7rem;" disabled>Desfazer</button>
+          <button id="btn-clear-all" class="btn-danger" style="font-size: 0.7rem;">Apagar Tudo</button>
+          <button id="btn-close-settings" class="btn-primary" style="font-size: 0.7rem;">Fechar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 1: NOVO ATENDIMENTO -->
+    <div id="panel-new" role="tabpanel" class="active">
+      <div class="new-attendance-grid">
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h2>Identificação do Atendimento</h2>
+              <button id="btn-ultimo-registro" class="btn-secondary" style="font-size: 0.7rem; padding: 0.2rem 0.5rem;" title="Ver o registro mais recente">🕘 Último registro</button>
+            </div>
+
+            <div class="form-group" style="background: var(--surface-alt); padding: 0.4rem 0.5rem; border-radius: var(--radius);">
+              <label style="display: flex; align-items: center; gap: 0.4rem; cursor: pointer; font-size: 0.8rem;">
+                <input type="checkbox" id="field-compliance" checked style="width: 14px; height: 14px; accent-color: var(--primary);">
+                <span>Validação de dados concluída com sucesso</span>
+              </label>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="field-attendant">Atendente</label>
+                <input type="text" id="field-attendant" value="Atendente de homologação">
+              </div>
+              <div class="form-group">
+                <label for="field-protocol">Protocolo / Nº do chamado</label>
+                <input type="text" id="field-protocol" placeholder="Obrigatório">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="field-bnf">Nome do Beneficiário (Opcional)</label>
+                <input type="text" id="field-bnf" placeholder="Nome completo">
+                <span class="hint">🔒 O primeiro nome é guardado no registro.</span>
+              </div>
+              <div class="form-group">
+                <label for="field-order">Pedido ou Guia</label>
+                <input type="text" id="field-order" placeholder="Obrigatório">
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h2>Catálogo de Procedimentos</h2>
+              <div style="display: flex; gap: 0.3rem; align-items: center;">
+                <button id="btn-uncheck-all-procs" class="btn-secondary" style="font-size: 0.7rem; padding: 0.2rem 0.4rem;" title="Desmarcar todos os procedimentos">Desmarcar todos</button>
+                <span id="catalog-menu-host"></span>
+              </div>
+            </div>
+            <div class="procedures-toolbar">
+              <div class="search-wrap">
+                <input type="text" id="procedure-search" placeholder="Buscar (nome, categoria, grupo, conteúdo · *relevante +situacional #rede)">
+                <button id="btn-clear-search" class="search-clear" title="Limpar busca" type="button">×</button>
+              </div>
+              <select id="grupo-filter" class="dashboard-select" title="Filtrar por grupo"></select>
+              <label style="display: flex; align-items: center; gap: 0.3rem; font-size: 0.75rem; cursor: pointer;">
+                <input type="checkbox" id="show-disabled-procedures"> Desativados
+              </label>
+            </div>
+            <div class="procedures-list" id="procedures-container"></div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <div class="card param-block" id="rede-block-container" style="display: none;">
+            <h3>Parâmetros de Rede Credenciada</h3>
+            <div class="param-grid">
+              <div class="form-group" style="grid-column: 1 / -1;">
+                <label for="rede-esp-search">Especialidade / procedimento (busca por nome, código ou descrição)</label>
+                <input type="hidden" id="rede-especialidade">
+                <input type="text" id="rede-esp-search" placeholder="Digite para buscar (ex: canal, gengiva, 06...)" autocomplete="off">
+                <div id="rede-esp-results" class="vdn-results"></div>
+                <div id="rede-esp-selected" class="hint" style="margin-top:3px;"></div>
+              </div>
+              <div class="form-group">
+                <label for="rede-estado">Estado (UF)</label>
+                <input type="text" id="rede-estado" placeholder="Ex: PR">
+              </div>
+              <div class="form-group">
+                <label for="rede-cidade">Cidade</label>
+                <input type="text" id="rede-cidade" placeholder="Ex: Curitiba">
+              </div>
+              <div class="form-group">
+                <label for="rede-municipio">Bairro / Município</label>
+                <input type="text" id="rede-municipio" placeholder="Ex: Centro">
+              </div>
+            </div>
+            <div class="param-envio">
+              <label class="param-envio-title">Forma de Envio</label>
+              <label class="chk-inline"><input type="checkbox" id="rede-envio-sms"> SMS</label>
+              <label class="chk-inline"><input type="checkbox" id="rede-envio-email"> E-mail</label>
+            </div>
+          </div>
+
+          <div class="card param-block" id="boleto-block-container" style="display: none;">
+            <h3>Parâmetros de Boleto</h3>
+            <div class="param-grid">
+              <div class="form-group">
+                <label for="boleto-mes">Mês de referência (mm/aaaa)</label>
+                <input type="text" id="boleto-mes" placeholder="Ex: 10/2026" maxlength="7">
+              </div>
+            </div>
+            <div class="param-envio">
+              <label class="param-envio-title">Forma de Envio</label>
+              <label class="chk-inline"><input type="checkbox" id="boleto-envio-sms"> SMS</label>
+              <label class="chk-inline"><input type="checkbox" id="boleto-envio-email"> E-mail</label>
+            </div>
+          </div>
+
+          <div class="card param-block" id="vdn-block-container" style="display: none;">
+            <h3>Transferência (VDN)</h3>
+            <input type="hidden" id="vdn-transfer">
+            <div class="form-group">
+              <label for="vdn-search-input">Buscar setor / célula</label>
+              <input type="text" id="vdn-search-input" placeholder="Digite para buscar (ex: Dental, SAC, Black...)" autocomplete="off">
+              <div id="vdn-results" class="vdn-results"></div>
+            </div>
+            <div id="vdn-selected-info" class="vdn-selected-info" style="display: none;"></div>
+          </div>
+
+          <div class="card param-block" id="cobertura-block-container" style="display: none;">
+            <h3>Cobertura</h3>
+            <datalist id="cobertura-sugestoes"></datalist>
+            <div class="form-group">
+              <label for="cobertura-1">Procedimento / cobertura</label>
+              <input type="text" id="cobertura-1" list="cobertura-sugestoes" placeholder="Digite ou busque (ex: Prótese, Canal...)" autocomplete="off">
+            </div>
+            <div class="form-group" id="cobertura-2-group" style="display: none;">
+              <label for="cobertura-2">2ª cobertura (opcional)</label>
+              <input type="text" id="cobertura-2" list="cobertura-sugestoes" placeholder="Digite ou busque..." autocomplete="off">
+            </div>
+            <button id="btn-add-cobertura" class="btn-secondary" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; align-self: flex-start;">+ Adicionar cobertura</button>
+            <div class="param-envio">
+              <label class="chk-inline"><input type="checkbox" id="cobertura-cobre" checked> Plano cobre?</label>
+              <label class="chk-inline"><input type="checkbox" id="cobertura-carencia"> Em carência?</label>
+            </div>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <h2>Prontuário do Atendimento</h2>
+              <div style="display: flex; gap: 0.3rem; align-items: center;">
+                <span id="manual-edited-badge" class="badge-cat badge-relevante" style="display: none;">Editado manualmente</span>
+                <button id="btn-recompile" class="btn-secondary" style="font-size: 0.7rem; padding: 0.15rem 0.35rem;" title="Recompor automático">🔄 Recompor</button>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label>Contatos para Envio (Memória de Tela)</label>
+              <div class="form-row">
+                <input type="text" id="screen-phone" placeholder="Telefone">
+                <input type="text" id="screen-email" placeholder="E-mail">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="prontuario-textarea">Texto compilado</label>
+              <textarea id="prontuario-textarea" class="prontuario-textarea"></textarea>
+            </div>
+
+            <div class="missing-warnings" id="missing-warnings-container"></div>
+
+            <div style="display: flex; gap: 0.4rem; justify-content: flex-end; margin-top: 0.4rem; align-items: center;">
+              <button id="btn-clear-attendance" class="btn-secondary" title="Limpar atendimento" style="padding: 0.3rem 0.6rem; font-weight: bold; color: var(--danger);">✖</button>
+              <button id="btn-copy-prontuario" class="btn-secondary" title="Copiar prontuário" style="padding: 0.3rem 0.6rem; font-weight: bold;">📋</button>
+              <button id="btn-finish-attendance" class="btn-primary" title="Finalizar atendimento" style="padding: 0.3rem 0.6rem; font-weight: bold; background-color: var(--success);">✔</button>
+            </div>
+
+            <div id="orientacao-block" class="orientacao-block" style="display:none;"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 2: HISTÓRICO & ARQUIVO -->
+    <div id="panel-history" role="tabpanel">
+      <div class="card" style="margin-bottom: 0.75rem;">
+        <h2>Filtros e Relatórios</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="archive-filter-year">Ano</label>
+            <select id="archive-filter-year"><option value="">Todos os anos</option></select>
+          </div>
+          <div class="form-group">
+            <label for="archive-filter-month">Mês</label>
+            <select id="archive-filter-month">
+              <option value="">Todos os meses</option>
+              <option value="0">Janeiro</option><option value="1">Fevereiro</option><option value="2">Março</option>
+              <option value="3">Abril</option><option value="4">Maio</option><option value="5">Junho</option>
+              <option value="6">Julho</option><option value="7">Agosto</option><option value="8">Setembro</option>
+              <option value="9">Outubro</option><option value="10">Novembro</option><option value="11">Dezembro</option>
+            </select>
+          </div>
+        </div>
+        <div style="display: flex; gap: 0.4rem; margin-top: 0.4rem; align-items: center; flex-wrap: wrap;">
+          <label style="display: flex; align-items: center; gap: 0.3rem; font-size: 0.75rem; cursor: pointer;">
+            <input type="checkbox" id="archive-include-notes"> Incluir texto do prontuário
+          </label>
+          <button id="btn-download-report" class="btn-secondary" style="font-size: 0.7rem;">📥 Baixar Relatório Geral (TXT)</button>
+          <button id="btn-purge-archive" class="btn-danger" style="font-size: 0.7rem;">🗑️ Apagar Arquivo</button>
+          <span id="archive-count-label" class="hint" style="margin-left: auto;">Total: 0</span>
+        </div>
+      </div>
+      <div class="card">
+        <h2>Atendimentos Recentes</h2>
+        <p class="hint" style="margin-bottom: 0.5rem;">Clique em qualquer linha da tabela para abrir a "gaveta" e monitorar/editar o prontuário.</p>
+        <div class="table-container">
+          <table id="history-table">
+            <thead>
+              <tr>
+                <th>Data/Hora</th>
+                <th>Beneficiário</th>
+                <th>Protocolo</th>
+                <th>Pedido</th>
+                <th>Atendente</th>
+                <th>Procedimentos</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 3: CALENDÁRIO & CLIMA -->
+    <div id="panel-calendar" role="tabpanel">
+      <div class="calendar-layout">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+            <div style="display: flex; gap: 0.3rem;">
+              <button id="cal-prev" class="btn-secondary" style="font-size: 0.75rem;">◀</button>
+              <button id="cal-today" class="btn-secondary" style="font-size: 0.75rem;">Hoje</button>
+              <button id="cal-next" class="btn-secondary" style="font-size: 0.75rem;">▶</button>
+            </div>
+            <h2 id="cal-title-btn" style="cursor: pointer; font-size: 0.9rem;">Mês e Ano</h2>
+            <div>
+              <button id="btn-copy-cal-today" class="btn-secondary" style="font-size: 0.7rem;">Copiar Clima</button>
+            </div>
+          </div>
+          <div id="calendar-view-container"></div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.4rem; border-top: 1px solid var(--border-light); padding-top: 0.4rem;">
+            <span id="cal-selected-period-label" style="font-weight: bold; font-size: 0.8rem;">Nenhum período medido</span>
+            <div style="display: flex; gap: 0.3rem;">
+              <button id="btn-clear-cal-period" class="btn-secondary" style="font-size: 0.7rem;">Limpar</button>
+              <button id="btn-copy-cal-period" class="btn-primary" style="font-size: 0.7rem;">Copiar Período</button>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <div class="card">
+            <h3>Clima Atual</h3>
+            <p id="weather-today-desc" class="hint" style="font-size: 0.75rem;">Carregando...</p>
+            <div class="form-group" style="margin-top: 0.4rem;">
+              <label for="setting-city-search">Alterar Cidade</label>
+              <div style="display: flex; gap: 0.3rem;">
+                <input type="text" id="setting-city-search" placeholder="Cidade">
+                <button id="btn-search-city" class="btn-secondary" style="font-size: 0.7rem;">Buscar</button>
+              </div>
+              <div id="city-search-results" style="display: flex; flex-direction: column; gap: 0.2rem; margin-top: 0.2rem;"></div>
+              <span id="current-city-label" class="hint" style="margin-top: 0.2rem; display: block;">Atual: Curitiba</span>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Feriados do Mês</h3>
+            <ul id="holidays-list" style="padding-left: 1rem; font-size: 0.75rem; color: var(--text-muted); display: flex; flex-direction: column; gap: 0.15rem;"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 4: PAINEL DE PRODUTIVIDADE -->
+    <div id="panel-dashboard" role="tabpanel">
+      <div class="card" style="margin-bottom: 0.75rem;">
+        <h2>Filtros do Painel</h2>
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dash-filter-year">Ano</label>
+            <select id="dash-filter-year"><option value="">Todos</option></select>
+          </div>
+          <div class="form-group">
+            <label for="dash-filter-month">Mês</label>
+            <select id="dash-filter-month">
+              <option value="">Todos</option>
+              <option value="0">Janeiro</option><option value="1">Fevereiro</option><option value="2">Março</option>
+              <option value="3">Abril</option><option value="4">Maio</option><option value="5">Junho</option>
+              <option value="6">Julho</option><option value="7">Agosto</option><option value="8">Setembro</option>
+              <option value="9">Outubro</option><option value="10">Novembro</option><option value="11">Dezembro</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="dash-filter-week">Semana</label>
+            <select id="dash-filter-week">
+              <option value="">Todas</option>
+              <option value="0">Semana 1</option><option value="1">Semana 2</option>
+              <option value="2">Semana 3</option><option value="3">Semana 4</option><option value="4">Semana 5</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-grid">
+        <div class="stat-card">
+          <h3>Ano</h3>
+          <div id="stat-year-val" class="value">0</div>
+        </div>
+        <div class="stat-card">
+          <h3>Mês</h3>
+          <div id="stat-month-val" class="value">0</div>
+        </div>
+        <div class="stat-card">
+          <h3>Filtrado</h3>
+          <div id="stat-period-val" class="value">0</div>
+        </div>
+      </div>
+
+      <div class="chart-container">
+        <h3>Evolução Diária</h3>
+        <div id="daily-chart-bars" style="display: flex; align-items: flex-end; gap: 8px; height: 130px; overflow-x: auto; padding-top: 25px; border-bottom: 1px solid var(--border-light);"></div>
+        <p id="daily-chart-legend" class="hint" style="margin-top: 0.4rem;"></p>
+      </div>
+
+      <div class="new-attendance-grid">
+        <div class="card">
+          <h3>Média por Dia</h3>
+          <div id="weekday-stats-container" style="display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.4rem;"></div>
+        </div>
+        <div class="card">
+          <h3>Fluxo por Horário</h3>
+          <div id="weekly-breakdown-container" style="display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.4rem;"></div>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top: 0.75rem;">
+        <h3>Top 5 Procedimentos</h3>
+        <div id="top-procedures-container" style="display: flex; flex-direction: column; gap: 0.3rem; margin-top: 0.4rem;"></div>
+      </div>
+    </div>
+
+    <!-- ABA 5: ABC & VDN -->
+    <div id="panel-abcvdn" role="tabpanel">
+      <div class="new-attendance-grid">
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Catálogo ABC</h2>
+            <button id="btn-open-abc-modal" class="btn-primary" style="font-size: 0.7rem; padding: 0.2rem 0.4rem;">+ Novo ABC</button>
+          </div>
+          <div class="procedures-toolbar" style="margin-top: 0.4rem;">
+            <input type="text" id="abc-search" placeholder="Buscar ABC...">
+            <button id="btn-abc-sort-az" class="btn-secondary" style="font-size: 0.7rem;">A-Z</button>
+            <button id="btn-abc-sort-code" class="btn-secondary" style="font-size: 0.7rem;">Código</button>
+          </div>
+          <div id="abc-container" style="max-height: 350px; overflow-y: auto; display: flex; flex-direction: column; gap: 0.4rem; margin-top: 0.4rem;"></div>
+        </div>
+
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2>Diretório VDN / Ramais</h2>
+            <button id="btn-open-vdn-modal" class="btn-primary" style="font-size: 0.7rem; padding: 0.2rem 0.4rem;">+ Novo VDN</button>
+          </div>
+          <div class="procedures-toolbar" style="margin-top: 0.4rem;">
+            <input type="text" id="vdn-search" placeholder="Buscar VDN...">
+            <button id="btn-vdn-sort-az" class="btn-secondary" style="font-size: 0.7rem;">A-Z</button>
+          </div>
+          <div class="table-container" style="margin-top: 0.4rem; max-height: 350px; overflow-y: auto;">
+            <table id="vdn-table">
+              <thead>
+                <tr>
+                  <th>Célula / Skill</th>
+                  <th>VDN</th>
+                  <th>Telefone</th>
+                  <th>Horário</th>
+                  <th>Ações</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA 6: VERSÕES -->
+    <div id="panel-versoes" role="tabpanel">
+      <div class="card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <h2>Histórico de Versões</h2>
+          <span id="versao-atual" class="settings-badge"></span>
+        </div>
+        <p class="hint" style="margin-bottom:0.5rem;">Registro das mudanças do SisGeral. O changelog completo também está no README.</p>
+        <div id="versoes-container" style="display:flex; flex-direction:column; gap:0.6rem;"></div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAIS DE PROCEDIMENTO, ABC E VDN -->
+  <dialog id="modal-procedure" style="padding: 1rem; border: none; border-radius: var(--radius); background: var(--surface-color); color: var(--text-main); box-shadow: var(--shadow); max-width: 780px; width: 95%;">
+    <h3 id="modal-procedure-title" style="margin-bottom: 0.6rem;">Novo Procedimento</h3>
+    <input type="hidden" id="proc-modal-id">
+    <div class="proc-modal-grid">
+      <div class="proc-modal-left">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="proc-modal-title">Título</label>
+            <input type="text" id="proc-modal-title">
+          </div>
+          <div class="form-group">
+            <label for="proc-modal-category">Categoria (comportamento)</label>
+            <select id="proc-modal-category">
+              <option value="relevante">Relevante</option>
+              <option value="situacional">Situacional</option>
+              <option value="guia">Guia</option>
+              <option value="rede">Rede</option>
+              <option value="boleto">Boleto</option>
+              <option value="rca_flow">RCA / Flow</option>
+              <option value="vdn">VDN / Transferência</option>
+              <option value="cobertura">Cobertura</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group" style="margin-top: 0.4rem;">
+          <label for="proc-modal-grupo">Grupo (organização — opcional, deixe vazio p/ automático)</label>
+          <input type="text" id="proc-modal-grupo" list="grupos-sugestoes" placeholder="Ex: Pagamento, Cadastro/Contrato, Rede/Agendamento...">
+          <datalist id="grupos-sugestoes">
+            <option value="Pagamento"></option>
+            <option value="Cadastro/Contrato"></option>
+            <option value="Rede/Agendamento"></option>
+            <option value="Guia/Autorização"></option>
+            <option value="Cancelamento"></option>
+            <option value="Cobertura/Carência"></option>
+            <option value="Transferência"></option>
+            <option value="Acesso/App"></option>
+            <option value="Geral"></option>
+          </datalist>
+        </div>
+        <div class="form-group" style="margin-top: 0.4rem;">
+          <label for="proc-modal-text">Texto Base (vai para o prontuário)</label>
+          <textarea id="proc-modal-text" style="height: 120px; padding: 0.3rem; border: 1px solid var(--border-color); border-radius: var(--radius); background: var(--surface-alt); font-size: 0.8rem; width: 100%; font-family: monospace;"></textarea>
+        </div>
+        <div class="form-group" style="margin-top: 0.4rem;">
+          <label for="proc-modal-orientacao">Orientação / informações a passar (não vai para o prontuário)</label>
+          <textarea id="proc-modal-orientacao" placeholder="Passo a passo, o que confirmar antes de encerrar, informações a passar ao beneficiário... (uma linha com &quot;- &quot; vira item)" style="height: 80px; padding: 0.3rem; border: 1px solid var(--border-color); border-radius: var(--radius); background: var(--surface-alt); font-size: 0.8rem; width: 100%;"></textarea>
+        </div>
+        <div class="form-group" style="margin-top: 0.4rem;">
+          <label>Links de referência (opcional, até 5)</label>
+          <div id="proc-modal-links-host" style="display:flex; flex-direction:column; gap:0.3rem;"></div>
+        </div>
+        <div class="form-group" style="margin-top: 0.4rem;">
+          <label class="chk-inline"><input type="checkbox" id="proc-modal-show" checked> Exibir este apoio abaixo do prontuário quando o procedimento for marcado</label>
+        </div>
+      </div>
+      <div class="proc-modal-right">
+        <div style="font-size: 0.72rem; font-weight: bold; color: var(--primary); margin-bottom: 0.3rem;">Variáveis</div>
+        <div class="hint" style="margin-bottom: 0.4rem;">Clique para inserir no campo focado, ou arraste para dentro dele.</div>
+        <div id="proc-var-chips"></div>
+      </div>
+    </div>
+    <div style="display: flex; justify-content: flex-end; gap: 0.4rem; margin-top: 0.7rem;">
+      <button class="btn-secondary" value="cancel" style="font-size: 0.75rem;">Cancelar</button>
+      <button id="btn-save-procedure" class="btn-primary" style="font-size: 0.75rem;">Salvar</button>
+    </div>
+  </dialog>
+
+  <dialog id="modal-abc" style="padding: 1rem; border: none; border-radius: var(--radius); background: var(--surface-color); color: var(--text-main); box-shadow: var(--shadow); max-width: 400px; width: 100%;">
+    <h3 id="modal-abc-title" style="margin-bottom: 0.4rem;">Procedimento ABC</h3>
+    <input type="hidden" id="abc-modal-id">
+    <div class="form-group" style="margin-bottom: 0.4rem;">
+      <label for="abc-modal-code">Código</label>
+      <input type="text" id="abc-modal-code">
+    </div>
+    <div class="form-group" style="margin-bottom: 0.4rem;">
+      <label for="abc-modal-name">Nome</label>
+      <input type="text" id="abc-modal-name">
+    </div>
+    <div class="form-group" style="margin-bottom: 0.6rem;">
+      <label for="abc-modal-desc">Descrição</label>
+      <textarea id="abc-modal-desc" style="height: 80px; padding: 0.3rem; border: 1px solid var(--border-color); border-radius: var(--radius); background: var(--surface-alt); font-size: 0.8rem; width: 100%;"></textarea>
+    </div>
+    <div style="display: flex; justify-content: flex-end; gap: 0.4rem;">
+      <button class="btn-secondary" value="cancel" style="font-size: 0.75rem;">Cancelar</button>
+      <button id="btn-save-abc" class="btn-primary" style="font-size: 0.75rem;">Salvar</button>
+    </div>
+  </dialog>
+
+  <dialog id="modal-vdn" style="padding: 1rem; border: none; border-radius: var(--radius); background: var(--surface-color); color: var(--text-main); box-shadow: var(--shadow); max-width: 380px; width: 100%;">
+    <h3 id="modal-vdn-title" style="margin-bottom: 0.4rem;">VDN / Ramal</h3>
+    <input type="hidden" id="vdn-modal-id">
+    <div class="form-group" style="margin-bottom: 0.4rem;">
+      <label for="vdn-modal-skill">Célula / Skill</label>
+      <input type="text" id="vdn-modal-skill">
+    </div>
+    <div class="form-group" style="margin-bottom: 0.4rem;">
+      <label for="vdn-modal-vdn">Número VDN</label>
+      <input type="text" id="vdn-modal-vdn">
+    </div>
+    <div class="form-group" style="margin-bottom: 0.4rem;">
+      <label for="vdn-modal-phone">Telefone</label>
+      <input type="text" id="vdn-modal-phone">
+    </div>
+    <div class="form-group" style="margin-bottom: 0.6rem;">
+      <label for="vdn-modal-hours">Horário</label>
+      <input type="text" id="vdn-modal-hours">
+    </div>
+    <div style="display: flex; justify-content: flex-end; gap: 0.4rem;">
+      <button class="btn-secondary" value="cancel" style="font-size: 0.75rem;">Cancelar</button>
+      <button id="btn-save-vdn" class="btn-primary" style="font-size: 0.75rem;">Salvar</button>
+    </div>
+  </dialog>
+
+  <!-- MODAL: ÚLTIMO REGISTRO (somente leitura + cópia) -->
+  <dialog id="modal-ultimo" style="padding: 1rem; border: none; border-radius: var(--radius); background: var(--surface-color); color: var(--text-main); box-shadow: var(--shadow); max-width: 560px; width: 95%;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+      <h3 style="margin: 0;">🕘 Último registro</h3>
+      <span class="hint" id="ultimo-data"></span>
+    </div>
+    <div id="ultimo-conteudo" style="display: flex; flex-direction: column; gap: 0.3rem;"></div>
+    <div class="form-group" style="margin-top: 0.5rem;">
+      <label>Prontuário</label>
+      <textarea id="ultimo-prontuario" readonly style="height: 160px; padding: 0.4rem; border: 1px solid var(--border-color); border-radius: var(--radius); background: var(--surface-alt); font-size: 0.8rem; width: 100%; font-family: monospace;"></textarea>
+    </div>
+    <div style="display: flex; justify-content: flex-end; gap: 0.4rem; margin-top: 0.5rem;">
+      <button id="btn-copy-ultimo" class="btn-secondary" style="font-size: 0.75rem;">📋 Copiar prontuário</button>
+      <button value="cancel" class="btn-primary" style="font-size: 0.75rem;" onclick="this.closest('dialog').close()">Fechar</button>
+    </div>
+    <p class="hint" style="margin-top: 0.4rem;">Para editar ou excluir, use a aba "Histórico &amp; Arquivo".</p>
+  </dialog>
+
+  <!-- CONTAINER DE NOTIFICAÇÕES TOAST -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- SCRIPTS -->
+  <script src="app.js"></script>
+</body>
+</html>
