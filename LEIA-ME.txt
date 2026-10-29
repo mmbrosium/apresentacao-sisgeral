@@ -1,0 +1,38 @@
+SISGERAL - APRESENTACAO E SISTEMA
+Paulo Guilherme de Souza Veiga - outubro de 2026
+
+O QUE TEM NESTA PASTA
+
+  ABRIR - Apresentacao.html   abre a apresentacao (leitura de uns 10 minutos)
+  ABRIR - SisGeral.html       abre o sistema, pra testar ao vivo
+  apresentacao\               os arquivos da apresentacao (nao precisa mexer)
+  sisgeral\                   o sistema inteiro: index.html, styles.css, app.js e README.md
+  LEIA-ME.txt                 este arquivo
+
+COMO ABRIR
+
+  1. Nao precisa instalar nada nem ter internet.
+  2. De dois cliques em "ABRIR - Apresentacao.html". Ela abre no navegador.
+  3. Na apresentacao, o botao "Abrir o SisGeral ao vivo" abre o sistema numa aba nova.
+     Ou de dois cliques em "ABRIR - SisGeral.html" direto.
+  4. Nas telas da apresentacao, clique numa imagem pra ampliar. Nas telas com
+     numeros, passe o mouse em cima de um numero pra ler o que e cada parte.
+
+SE ABRIR NO NAVEGADOR ERRADO
+
+  Os arquivos abrem no navegador padrao do Windows. Pra ser o Chrome ou o Edge:
+  - Clique com o botao direito em "ABRIR - Apresentacao.html"
+  - Abrir com > Escolher outro aplicativo
+  - Escolha Google Chrome ou Microsoft Edge e marque "Sempre usar este aplicativo"
+  Isso vale pra todos os arquivos .html daqui em diante.
+
+SOBRE OS DADOS
+
+  O sistema abre com o catalogo de procedimentos completo e o historico vazio.
+  Tudo que for registrado no teste fica guardado so no navegador desta maquina,
+  nao sai pra lugar nenhum. Pra limpar: engrenagem (canto superior direito) >
+  Apagar tudo.
+
+PRA LEVAR O SISTEMA PRA OUTRA MAQUINA
+
+  Copie a pasta "sisgeral" inteira. E so isso.

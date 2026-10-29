@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SisGeral · apresentação</title>
+  <meta name="description" content="SisGeral: gerenciador de atendimento de SAC num arquivo só. O que é, como funciona, o que entrega e o que precisaria pra chegar ao time.">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600&family=Source+Sans+3:ital,wght@0,400;0,600;1,400&display=swap">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="lupa.css">
+  <style>
+    :root { --sobre: var(--sistemas); }
+    body.pg-sobre { --orn: var(--sistemas); }
+    .case-head .meta small { display: block; color: var(--muted); margin-top: 6px; font-size: .9rem; }
+    .md.sobre .sec { max-width: 72ch; }
+    .md figure.wide { max-width: none; width: min(100%, var(--col)); }
+    .md .destaques { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px; margin: 14px 0 18px; max-width: none; }
+    .md .destaques div { border: 1px solid var(--line); border-left: 3px solid var(--c); padding: 10px 12px; }
+    .md .destaques b { display: block; font-size: 1.5rem; font-weight: 600; line-height: 1.1; color: var(--c); }
+    .md .destaques span { color: var(--muted); font-size: .85rem; }
+    .abrir-sis { display: inline-block; border: 1px solid var(--c); color: var(--c); padding: 6px 14px; text-decoration: none; font-weight: 600; margin: 8px 8px 0 0; }
+    .abrir-sis:hover { background: var(--c); color: #000; }
+    .lang, .snd, .nav-log { display: none !important; }
+    @media print { .topbar, .orn, .foot { display: none; } .md h2 { position: static; } body { background: #fff; color: #000; } }
+  </style>
+</head>
+<body class="pg-sobre" data-orn="circuito">
+  <div class="orn l" aria-hidden="true"></div>
+  <div class="orn r" aria-hidden="true"></div>
+  <nav class="topbar" aria-label="Seções">
+    <div class="topbar-in">
+      <a class="brand" href="#" id="brand">…</a>
+      <div class="topnav" id="topnav"></div>
+    </div>
+  </nav>
+  <main class="wrap">
+    <header class="case-head" id="topo" style="--c:var(--sistemas)">
+      <p class="cat">Sistemas</p>
+      <h1 id="s-nome">…</h1>
+      <p class="meta" id="s-cargo"></p>
+      <p class="meta"><small>Paulo Guilherme de Souza Veiga · versão 3.25 · outubro de 2026 · leitura de 10 minutos</small></p>
+      <p class="meta"><a class="abrir-sis" href="https://github.com/mmbrosium/sisgeral" target="_blank" rel="noopener">Código do SisGeral →</a> <small>repositório privado; o acesso é liberado por convite. Na versão entregue em pasta, o sistema vem junto, pra abrir sem internet.</small></p>
+    </header>
+    <article class="md sobre" id="sobre-md"><p style="color:var(--muted)">Carregando…</p></article>
+    <footer class="foot"><span>SisGeral · Paulo Guilherme de Souza Veiga</span><span>Arquivo único. Abre em qualquer navegador, sem internet.</span></footer>
+  </main>
+  <script src="assets/marked.min.js"></script>
+  <script src="assets/ornamentos.js"></script>
+  <script src="assets/ornamentos2.js"></script>
+  <script src="cases.js"></script>
+  <script src="apresentacao.js"></script>
+  <script src="app.js"></script>
+  <script src="pontos.js"></script>
+  <script src="lupa.js"></script>
+</body>
+</html>

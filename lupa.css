@@ -1,0 +1,40 @@
+/* Lupa: clique amplia a tela; nas telas com pontos numerados, passar o mouse explica cada parte. */
+.md figure.shot { margin: 18px 0 22px; max-width: none; position: relative; }
+.md figure.shot img { display: block; width: 100%; border: 1px solid var(--line); background: #0a0a0a; cursor: zoom-in; transition: border-color .15s; }
+.md figure.shot:hover img { border-color: var(--c); }
+.md figure.shot figcaption { color: var(--muted); font-size: .85rem; margin-top: 8px; display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.md figure.shot figcaption > span:first-child { flex: 1 1 60%; }
+.md figure.shot .lupa-badge { margin-left: auto; font-size: .75rem; color: var(--c); border: 1px solid var(--line); padding: 1px 8px; white-space: nowrap; }
+
+.lupa { --c: var(--sistemas); position: fixed; inset: 0; z-index: 60; background: #050505; display: none; flex-direction: column; color: #e6e6e6; }
+.lupa.on { display: flex; }
+.lupa-bar, .lupa-foot { display: flex; align-items: center; gap: 14px; padding: 8px 16px; font-size: .85rem; border-bottom: 1px solid var(--line); background: var(--panel); flex: none; }
+.lupa-foot { border-bottom: 0; border-top: 1px solid var(--line); justify-content: center; }
+.lupa-cap { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lupa-tools { display: flex; align-items: center; gap: 6px; }
+.lupa button { font: inherit; color: #e6e6e6; background: var(--panel-2); border: 1px solid var(--line); padding: 3px 10px; cursor: pointer; line-height: 1.3; }
+.lupa button:hover { border-color: var(--c); color: var(--c); }
+.lupa button:disabled { opacity: .35; cursor: default; }
+.lupa-z { min-width: 44px; text-align: center; color: var(--muted); font-variant-numeric: tabular-nums; }
+.lupa-hint { color: var(--muted); }
+.lupa-hint b { color: var(--c); font-weight: 600; }
+.lupa-scroll { flex: 1; overflow: auto; cursor: zoom-out; display: flex; }
+.lupa-stage { position: relative; margin: auto; flex: none; cursor: zoom-in; }
+.lupa-stage.max { cursor: zoom-out; }
+.lupa-stage img { display: block; width: 100%; height: auto; border: 1px solid var(--line); user-select: none; -webkit-user-drag: none; }
+.lupa-pts { position: absolute; inset: 0; }
+
+/* Pontos explicados */
+.pt { position: absolute; box-sizing: border-box; border: 1px dashed color-mix(in srgb, var(--c) 60%, transparent); cursor: help; }
+.pt i { position: absolute; left: -9px; top: -9px; width: 18px; height: 18px; border-radius: 50%; background: var(--c); color: #000; font: 600 11px/18px "Source Sans 3", sans-serif; font-style: normal; text-align: center; box-shadow: 0 0 0 2px #000; }
+.pt:hover, .pt.on { border: 2px solid var(--c); background: color-mix(in srgb, var(--c) 14%, transparent); z-index: 2; }
+.pt .tip { display: none; position: absolute; left: 0; top: calc(100% + 8px); width: max-content; max-width: 280px; background: #15161a; color: #e6e6e6; border: 1px solid var(--c); padding: 8px 10px; font-size: .82rem; line-height: 1.4; z-index: 3; cursor: default; box-shadow: 0 6px 24px rgba(0,0,0,.6); }
+.pt.up .tip { top: auto; bottom: calc(100% + 8px); }
+.pt.left .tip { left: auto; right: 0; }
+.pt:hover .tip, .pt.on .tip { display: block; }
+.pt .tip b { color: var(--c); font-weight: 600; display: block; margin-bottom: 2px; }
+.lupa.sem .pt { display: none; }
+
+@media (max-width: 720px) { .lupa-bar, .lupa-foot { padding: 6px 10px; gap: 8px; } .lupa-hint { display: none; } .pt .tip { max-width: 220px; } }
+@media print { .lupa, .md figure.shot figcaption > span:first-child { flex: 1 1 60%; }
+.md figure.shot .lupa-badge { display: none !important; } }
