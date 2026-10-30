@@ -1079,3 +1079,19 @@ dialog::backdrop {
 .boleto-item { display: inline-flex; align-items: center; gap: 2px; }
 .boleto-item input { width: 86px; padding: 0.3rem 0.4rem; border: 1px solid var(--border-color); border-radius: var(--radius); background: var(--surface-alt); font-size: 0.8rem; text-align: center; }
 .boleto-item .boleto-x { border: none; background: transparent; color: var(--danger); font-size: 1rem; line-height: 1; padding: 0 0.2rem; cursor: pointer; }
+
+/* Cabeçalho das tabelas com rolagem (VDN, histórico) fica cravado */
+.table-container thead th { position: sticky; top: 0; z-index: 2; box-shadow: 0 1px 0 var(--border-light); }
+
+/* Calendário: linha de baixo com estimativa e clima lado a lado; botões do seletor com cor */
+.cal-bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin-top: 0.8rem; align-items: start; }
+.cal-bottom .card { margin-top: 0 !important; }
+@media (max-width: 900px) { .cal-bottom { grid-template-columns: 1fr; } }
+.range-btns .rb-corridos { background: #3b82f6; color: #fff; border-color: #3b82f6; }
+.range-btns .rb-uteis { background: var(--success); color: #fff; border-color: var(--success); }
+.range-btns .rb-ambos { background: var(--primary); color: var(--on-primary); border-color: var(--primary); }
+.range-btns .rb-hoje { background: transparent; color: var(--primary); border: 1px solid var(--primary); box-shadow: inset 0 0 0 1px var(--primary); font-weight: 600; }
+.range-btns button:disabled { opacity: 0.45; cursor: not-allowed; }
+.cal-regras { font-size: 0.7rem; color: var(--text-muted); border-top: 1px dashed var(--border-light); margin-top: 0.5rem; padding-top: 0.4rem; line-height: 1.4; }
+.carencia-row { display: flex; justify-content: space-between; align-items: center; gap: 0.5rem; font-size: 0.78rem; padding: 3px 0; }
+.carencia-row strong { color: var(--primary); font-family: monospace; font-size: 0.85rem; }

@@ -567,112 +567,102 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ABC = especialidades de direcionamento da rede (código + nome + descrição)
   const SEED_ABC = [
-    { code: "—", name: "Cirurgia", description: "Cirurgia bucomaxilofacial, extrações e correções ósseas/teciduais." },
-    { code: "—", name: "Dentística Restauradora", description: "Restaurações e recuperação estética/funcional do dente." },
-    { code: "—", name: "Endodontia", description: "Tratamento de canal e doenças da polpa dentária." },
-    { code: "—", name: "Odontologia Preventiva", description: "Prevenção, profilaxia e orientação de saúde bucal." },
-    { code: "—", name: "Periodontia", description: "Tratamento de gengiva e tecidos de suporte do dente." },
-    { code: "—", name: "Prótese Dentária", description: "Próteses fixas e removíveis, reabilitação oral." },
-    { code: "—", name: "Urgência em Consultório", description: "Atendimento de urgência odontológica agendada em consultório." },
-    { code: "—", name: "Clínico Geral", description: "Clínica odontológica geral e avaliação inicial." },
-    { code: "—", name: "Disfunção Temporomandibular e Dor Orofacial", description: "DTM e dores orofaciais (ATM)." },
-    { code: "—", name: "Odontologia Estética", description: "Procedimentos estéticos (clareamento, facetas etc.)." },
-    { code: "—", name: "Odontopediatria", description: "Odontologia para crianças." },
-    { code: "—", name: "Ortodontia", description: "Correção de posição dos dentes e mordida (aparelhos)." },
-    { code: "—", name: "Radiologia Odontológica e Imaginologia", description: "Exames de imagem odontológicos." },
-    { code: "—", name: "Pronto Socorro 24 horas", description: "Urgência/emergência odontológica 24h." },
-    { code: "—", name: "Cirurgia (Especializada/Divulgação)", description: "Cirurgia especializada / rede divulgada." },
-    { code: "—", name: "Sedação", description: "Procedimentos com sedação." }
+    { code: "A", name: "Cirurgia", description: "Cirurgia bucomaxilofacial, extrações e correções ósseas/teciduais." },
+    { code: "B", name: "Dentística Restauradora", description: "Restaurações e recuperação estética/funcional do dente." },
+    { code: "C", name: "Endodontia", description: "Tratamento de canal e doenças da polpa dentária." },
+    { code: "D", name: "Odontologia Preventiva", description: "Prevenção, profilaxia e orientação de saúde bucal." },
+    { code: "E", name: "Periodontia", description: "Tratamento de gengiva e tecidos de suporte do dente." },
+    { code: "F", name: "Prótese Dentária", description: "Próteses fixas e removíveis, reabilitação oral." },
+    { code: "G", name: "Urgência em Consultório", description: "Atendimento de urgência odontológica agendada em consultório." },
+    { code: "H", name: "Clínico Geral", description: "Clínica odontológica geral e avaliação inicial." },
+    { code: "I", name: "Disfunção Temporomandibular e Dor Orofacial", description: "DTM e dores orofaciais (ATM)." },
+    { code: "J", name: "Odontologia Estética", description: "Procedimentos estéticos (clareamento, facetas etc.)." },
+    { code: "K", name: "Odontopediatria", description: "Odontologia para crianças." },
+    { code: "L", name: "Ortodontia", description: "Correção de posição dos dentes e mordida (aparelhos)." },
+    { code: "M", name: "Radiologia Odontológica e Imaginologia", description: "Exames de imagem odontológicos." },
+    { code: "N", name: "Pronto Socorro 24 horas", description: "Urgência/emergência odontológica 24h." },
+    { code: "O", name: "Cirurgia (Especializada/Divulgação)", description: "Cirurgia especializada / rede divulgada." },
   ];
 
   // VDN = diretório de células/ramais de transferência
   const SEED_VDN = [
     { skill: "Beneficiário Dental", vdn: "4800000001", phone: "0800 000 0000", hours: "24h" },
     { skill: "Beneficiário Médico", vdn: "4800000002", phone: "0800 000 0000", hours: "24h" },
-    { skill: "Atendimento GIH", vdn: "4800000003", phone: "0800 000 0000", hours: "24h" },
-    { skill: "Atendimento Reembolso", vdn: "4800000004", phone: "0800 000 0000", hours: "24h" },
-    { skill: "Ação Judicial (Benef. Alta Complexidade)", vdn: "4800000005", phone: "0800 000 0000", hours: "24h — só assuntos da ação judicial" },
     { skill: "SAC Saúde", vdn: "4800000006", phone: "0800 000 0000", hours: "24h" },
     { skill: "Corretor", vdn: "4800000007", phone: "0800 000 0000", hours: "Seg a Sex 8h-18h" },
-    { skill: "Equipe de Vendas Dental PF e PME Médico/Dental", vdn: "4800000008", phone: "0800 000 0000", hours: "Seg-Sex 8h-18h, Sáb 8h-14h" },
     { skill: "Gestor PME", vdn: "4800000009", phone: "0800 000 0000", hours: "Seg a Sex 8h-18h" },
     { skill: "Gestor PME – Cancelamento Médico", vdn: "4800000010", phone: "0800 000 0000", hours: "Seg a Sex 8h-18h" },
     { skill: "Gestor PME – Cancelamento Dental", vdn: "4800000011", phone: "0800 000 0000", hours: "Seg a Sex 8h-18h" },
-    { skill: "Gestor PME – Negociação (Contratos Cancelados)", vdn: "4800000012", phone: "0800 000 0000", hours: "Seg a Sex 8h-18h" },
     { skill: "Linha Black – Beneficiário", vdn: "4800000013", phone: "0800 000 0000", hours: "24h" },
     { skill: "Linha Black – Gestor Empresa", vdn: "4800000014", phone: "0800 000 0000", hours: "Seg a Sex 8h-18h" },
     { skill: "Linha Black – Dental (Dental Premium)", vdn: "4800000015", phone: "0800 000 0000", hours: "24h" },
-    { skill: "Prestador Dental", vdn: "4800000016", phone: "0800 000 0000", hours: "24h" },
-    { skill: "Prestador Dental - Black", vdn: "4800000017", phone: "0800 000 0000", hours: "24h" },
-    { skill: "Prestador Saúde – NAC", vdn: "4800000018", phone: "0800 000 0000", hours: "7h-19h" },
-    { skill: "Parceiro", vdn: "4800000019", phone: "0800 000 0000", hours: "Seg-Sex 8h-20h, Sáb/Dom/fer 9h-17h" }
   ];
 
   const SEED_ABC_PROCS = [
-    { code: "—", name: "Alveoplastia", description: "Cirurgia que corrige o osso que sustenta os dentes. Realizada normalmente após a extração de múltiplos dentes ou quando há necessidade de colocar uma prótese e osso está irregular. [Direcion" },
-    { code: "—", name: "Ajuste Oclusal por Desgaste Seletivo", description: "Este procedimento estará incluído no valor das restaurações. Os dentistas divulgados na especialidade de periodontia podem solicitar este código, será admitido no máximo 3 sessões para benef" },
-    { code: "—", name: "Aplicação de Selante em Fóssulas Fissuras", description: "O selante é um material colocado em dentes com sulcos muito profundos para proteger contra a cárie dentária. A aplicação dos selantes consiste num procedimento rápido e indolor. Geralmente i" },
-    { code: "—", name: "Atividade Educativa para Pais E/ Cuidadores Dental Kids", description: "São orientações de higiene oral e dieta aos pacientes e cuidadores. Prazo de repetição: 4 meses. Utilizado somente para o plano específico Dental Kids [Direcionar: 19 Odontopediatria]" },
-    { code: "—", name: "Aumento de Coroa Clínica", description: "Indicado para os dentes em que a gengiva impossibilita a execução da reabilitação de forma satisfatória e necessite de rebaixamento ósseo para recuperação do espaço biológico. Os dentistas d" },
-    { code: "—", name: "Capeamento Pulpar Direto", description: "Proteção direta da polpa através de medicação local. Solicitado pelo endodontista conforme o dente afetado. Caso o CD clínico entre em contato relatando que não consegue visualizar o procedi" },
-    { code: "—", name: "Cirurgia Ortognática Cirurgia Parendodôntica = Apicetomia- Cirurgia Periodontal a Retalho", description: "O procedimento de Cirurgia Ortognática refere-se a cirurgia oral maior realizada em Hospital. É considerado por sua vez de segmentação médica, portanto a análise de cobertura deve ser realiz" },
-    { code: "—", name: "Clareamento para Dentes Desvitalizados", description: "Indicado para dentes anteriores e pré-molares. Máximo de 3 sessões. Realização somente em dentes com tratamento endodôntico satisfatório e comprovado escurecimento da porção coronária atravé" },
-    { code: "—", name: "Consulta Odontológica Dental Kids", description: "Consulta para a avaliação dentária para crianças. Em caso de clínica multidisciplinar será permitida uma consulta de planejamento de tratamento. Utilizado somente para o plano específico Den" },
-    { code: "—", name: "Consulta Urgência em Consultório", description: "Realização de procedimentos de urgência em consultório. São considerados procedimentos de urgência pela ANS: • Curativo em caso de hemorragia bucal; • Curativo em caso de odontalgia aguda (p" },
-    { code: "—", name: "Consulta Urgência em Pronto Socorro 24 Horas", description: "Realização de procedimentos de urgência e emergência. São considerados procedimentos de urgência pela ANS: • Curativo em caso de hemorragia bucal; • Curativo em caso de odontalgia aguda (pul" },
-    { code: "—", name: "Coroa 3/4 ou 4/5", description: "Prótese unitária que reconstrói apenas 3 ou 4 faces do dente. Encontra- se ativo, porém com exigência de envio de rx para autorização, da mesma forma que outros procedimentos de prótese (COR" },
-    { code: "—", name: "Coroa Total em Cerômero (dentes Anteriores)", description: "Indicado em dentes anteriores não passíveis de reconstrução por meio direto. Apenas para coroas unitárias, não utilizar para próteses parciais fixas. Necessário encaminhar imagem radiográfic" },
-    { code: "—", name: "Coroa Total Metálica", description: "Prótese unitária feita em metal que reconstrói totalmente o dente. Indicado em dentes não passíveis de reconstrução por meio direto. Apenas para coroas unitárias; não utilizar para próteses " },
-    { code: "—", name: "Coroa Total Metalo Cerâmica (porcelana)", description: "Indicado em dentes não passíveis de reconstrução por meio direto. Apenas para coroas unitárias; não utilizar para próteses parciais fixas. Imagem radiográfica final compatível com metal e po" },
-    { code: "—", name: "Coroa Total Metalo Plástica Cerômero", description: "Indicado em dentes não passíveis de reconstrução por meio direto. Apenas para coroas unitárias; não utilizar para próteses parciais fixas. Imagem radiográfica final compatível com metal e Ce" },
-    { code: "—", name: "Coroa Total Metalo Plástica Resina Acrílica", description: "Indicado em dentes não passíveis de reconstrução por meio direto. Apenas para coroas unitárias; não utilizar para próteses parciais fixas. Imagem radiográfica final compatível com metal e re" },
-    { code: "—", name: "Coroas em Dente Decíduo", description: "Para pacientes menores de 13 anos de idade. “Indicado para perdas precoces de dentes decíduos. ” [Direcionar: 19 Odontopediatria]" },
-    { code: "—", name: "Cunha Proximal", description: "É a remoção de porção óssea atrás do último dente da mandíbula que está impedindo o dente de erupcionar ou dificultando o preparo e a higiene (remoção de osso e tecido mole-gengiva). É neces" },
-    { code: "—", name: "Coroa Provisória sem Pino", description: "Procedimento indicado apenas para coroas unitárias. Não utilizar para próteses parciais fixas. Solicitamos formalizar a orientação da importância da reabilitação definitiva ao beneficiário, " },
-    { code: "—", name: "Coroa Provisória com Pino", description: "Dente artificial em resina acrílica com pino para ser usado por um período até a confecção do definitivo. Procedimento indicado apenas para coroas unitárias; Não utilizar para próteses parci" },
-    { code: "—", name: "Coroa Total Acrílica Prensada", description: "Coroa unitária que reconstrói totalmente o dente, confeccionada em acrílica prensada: Indicado em dentes não passíveis de reconstrução por meio direto. Apenas para coroas unitárias; não util" },
-    { code: "—", name: "Dente Supranumerário", description: "Qualquer dente que exceda o número normal de dentes é denominado extranumerário. Será solicitado o código normal do procedimento e quando for selecionar o dente, o supranumerário será lançad" },
-    { code: "—", name: "Documentação Ortodôntica Básica", description: "É um conjunto de exames complementares que auxiliam o profissional no tratamento ortodôntico. Procedimento inclui a Radiografia panorâmica, 5 fotos, 2 radiografias periapicais, 2 radiografia" },
-    { code: "—", name: "Documentação Ortodôntica Completa", description: "É um conjunto de exames complementares que auxiliam o profissional no tratamento ortodôntico. Procedimento inclui a Radiografia panorâmica, 1 telerradiografia com traçado, 1 traçado adiciona" },
-    { code: "—", name: "Documentação Ortodôntica Especia", description: "É um conjunto de exames complementares que auxiliam o profissional no tratamento ortodôntico. Procedimento inclui a Radiografia panorâmica, 1 telerradiografia com traçado, 1 traçado adiciona" },
-    { code: "—", name: "Documentação Ortodôntica Simple", description: "É um conjunto de exames complementares que auxiliam o profissional no tratamento ortodôntico. Procedimento inclui a Radiografia panorâmica, 1 telerradiografia com traçado, 1 traçado adiciona" },
-    { code: "—", name: "Endodontia com Instrumento", description: "Técnicas cirúrgicas utilizadas para cobrir a raiz dos dentes nos casos em que haja grande perda da gengiva. Procedimento inclui curativos pós-cirúrgicos, incisão e reposicionamentos de tecid" },
-    { code: "—", name: "Exérese ou Excisão de Cistos Odontológicos", description: "Remoção cirúrgica de cistos (lesão óssea) localizados na boca [Direcionar:  Cirurgia]" },
-    { code: "—", name: "Exodontia de Permanente por", description: "Exodontia de resto radicular [Direcionar: 01 Cirurgia]" },
-    { code: "—", name: "Exodontia Simples de Permanente", description: "Exodontia simples [Direcionar: 01 Cirurgia]" },
-    { code: "—", name: "Exérese ou Excisão de Mucocele", description: "É a remoção cirúrgica de um pequeno cisto benigno (bolha) na boca, geralmente no lábio inferior. [Direcionar: 01 Cirurgia]" },
-    { code: "—", name: "Faceta em Cerâmica Pura", description: "Faceta em cerâmica [Direcionar:  Dentística Restauradora, Prótese ou Odontologia]" },
-    { code: "—", name: "Faceta em Resina Direta", description: "Recobrimento estético direto (feito no consultório) com resinas sobre a face externa dos dentes, podendo ser realizado em uma única sessão (é uma restauração que recobre o dente). [Direciona" },
-    { code: "—", name: "Frenulectomia Labial ou Lingual", description: "Este procedimento consiste na remoção do freio labial ou lingual. Os procedimentos Frenulectomia labial e frenulectomia lingual (retirada total do tecido) estão vinculados à especialidade Od" },
-    { code: "—", name: "Frenulotomia", description: "O procedimento frenulotomia labial e, frenulotomia lingual (retirada parcial do tecido) estão vinculados à especialidade cirurgia. Necessário o envio de laudo com parecer clínico ou hipótese" },
-    { code: "—", name: "Implante Ortodôntico", description: "O implante ortodôntico são estruturas, geralmente feitas de titânio e utilizadas como recurso bastante atual e atuam para auxiliar na ancoragem e/ou correção de várias situações corriqueiras" },
-    { code: "—", name: "Mantenedor de Espaço Fixo", description: "O mantenedor de espaço é uma peça fixa feito sob medida em acrílico ou metal pelo dentista, odontopediatria ou ortodontista para manter o espaço para erupção do dente permanente no lugar cer" },
-    { code: "—", name: "Núcleo Metálico Fundido", description: "Pino que vai dentro da raiz para retenção da coroa. Confeccionado em laboratório protético. Procedimento inclui remoção parcial de material obturador radicular e preparo para núcleo. Necessá" },
-    { code: "—", name: "Núcleo de Fibra de Vidro ou Fibr de Carbono Mais Preenchimento", description: "Procedimento inclui remoção parcial de material obturador radicular e preparo para núcleo. Necessário encaminhar imagem radiográfica inicial para análise de autorização e final para análise " },
-    { code: "—", name: "Prevenção Módulo 1 - Dental Kid", description: "Procedimento inclui raspagem supra-gengival, profilaxia, adequação do meio, atividade educativa, evidenciação de placa e aplicação tópica de flúor; Procedimento realizado em pacientes menore" },
-    { code: "—", name: "Prótese Parcial Fixa em Metalo Cerâmica", description: "prótese para substituir dentes ausentes com preparos minimente invasivos dos dentes pilares, basicamente a nível de esmalte, e fixação com cimentos resinosos. O prestador deverá encaminhar i" },
-    { code: "—", name: "Prótese Parcial Fixa em Metalo Plástica", description: "As próteses metaloplástica são resinas conjugadas a uma estrutura de metal para reforço interno da prótese. O prestador deverá encaminhar imagem radiográfica inicial onde deverá possibilitar" },
-    { code: "—", name: "Prótese Parcial Fixa In Ceran L de Metal (metal Free)", description: "As próteses metal free são feitas de porcelana, o que permite que o dente fique de uma só cor, diminuindo a possibilidade de manchas cinzas aparecerem próximas à gengiva, já que as estrutura" },
-    { code: "—", name: "Prótese Parcial Fixa Provisória", description: "é uma parte importante do tratamento reabilitador, sendo uma fase intermediária necessária para a confecção das próteses definitivas. O prestador deverá encaminhar imagem radiográfica inicia" },
-    { code: "—", name: "Prótese Parcial Removível C", description: "A prótese parcial removível é uma armação metálica com dentes artificiais que substituem os naturais, ausentes devido a perdas. Mesmo sendo uma alternativa móvel, a prótese parcial removível" },
-    { code: "—", name: "Radiografia Oclusal em Clínica Radiológica", description: "Exame de imagem para auxiliar no diagnóstico do cirurgião-dentista feito em clínica radiológica. Para análise de pagamento, será necessário anexar no campo “imagem inicial” a imagem digitali" },
-    { code: "—", name: "Telerradiografia", description: "Tecnica Radiografia para auxiliar no diagnóstico do tratamento ortodôntico [Direcionar: 22 Radiologia Odontológica e Imagiologia]" },
-    { code: "—", name: "Radiografia Interproximal Bite- Wing em Clínica Radiológica", description: "Exame de imagem para auxiliar no diagnóstico do cirurgião-dentista feito em clínica radiológica. Para análise de pagamento, será necessário anexar no campo “imagem inicial” a imagem digitali" },
-    { code: "—", name: "Radiografia Panorâmica de MANDÍBULA/MAXILA (ortopantomografia)", description: "É um exame para complementar o exame clínico no diagnóstico das doenças dos dentes (cáries ou doenças endodônticas) e dos ossos da face. Inclui laudo da panorâmica. Necessário enviar imagem " },
-    { code: "—", name: "Radiografia Periapical em Clínic Radiológica", description: "Exame de imagem para auxiliar no diagnóstico do cirurgião-dentista feito em clínica radiológica. Para análise de pagamento, será necessário anexar no campo “imagem inicial” a imagem digitali" },
-    { code: "—", name: "Radiologia e Imaginologia Recimentação de Trabalho Protético", description: "é a especialidade que tem como objetivo a aplicação dos métodos exploratórios por imagem com a finalidade de diagnóstico, acompanhamento e documentação do complexo bucomaxilofacial e estrutu" },
-    { code: "—", name: "Remoção de Cálculo", description: "Procedimento responsável pela remoção de cálculo gengival [Direcionar: 05 Odontologia Preventiva]" },
-    { code: "—", name: "Remoção de Núcleo Intrarradicular", description: "Consiste na remoção do núcleo da cavidade intrarradicular, com finalidade endodôntica. (Procedimento solicitado somente pelo endodontista) [Direcionar: 03 Endodontia]" },
-    { code: "—", name: "Restauração em Cerâmica Pura – Inlay", description: "Restauração feita em porcelana em laboratório de prótese [Direcionar: 07 Prótese]" },
-    { code: "—", name: "Restauração em Cerâmica Pura – Onlay", description: "Restauração de grande extensão com envolvimento de cúspides feita em porcelana em laboratório de prótese. [Direcionar: 07 Prótese]" },
-    { code: "—", name: "Restauração Metálica Fundida", description: "Restauração em metal realizada em laboratório de prótese. Procedimento não autorizado para dentes que apresentam grande destruição coronária, que contraindiquem preparos parciais. Necessário" },
-    { code: "—", name: "Retratamento Endodôntico", description: "Reconfecção do tratamento de endodôntico, ocasionado por uma reinfecção no canal (raiz) do dente, já tratado anteriormente. É realizada a remoção da obturação do canal, nova desinfecção e no" },
-    { code: "—", name: "Sedação Consciente com Óxido Nitroso e Oxigênio em Odontologi", description: "Esta técnica consiste em realizar o tratamento odontológico com a inalação do óxido nitroso (N2O) associado ao oxigênio, através de um equipamento específico (fluxômetro) e de uma máscara na" },
-    { code: "—", name: "Sedação Medicamentosa", description: "A sedação medicamentosa (por meio de fármacos) pode ser um método efetivo utilizado em pacientes ansiosos ou com medo do tratamento odontológico. Produz depressão mínima no nível de consciên" },
-    { code: "—", name: "Técnica de Clark- Telerradiografia", description: "Este procedimento consiste na realização de 3 tomadas radiográficas (radiografia periapical), sendo uma em posição central, as demais variando a angulação para direita e para a esquerda (mes" },
-    { code: "—", name: "Tratamento de Perfuração Endodôntica", description: "Consiste no selamento (fechamento) de perfuração endodôntica com o material de escolha do profissional executante. [Direcionar: 03 Endodontia]" },
-    { code: "—", name: "Tratamento Endodôntico", description: "Tratamento realizado na raiz (canal) do dente, com remoção do \"nervo\", desinfecção do canal e preenchimento da raiz com material obturador. Este tratamento é realizado tanto em dentes perman" },
-    { code: "—", name: "Tratamento Endodôntico de Dente com Rizogênese Incompleta- Consulta Proc Ulectomia", description: "Dente com necessidade de intervenção endodôntica, mas que se apresenta com o ápice aberto (raiz do dente ainda não fechou). Máximo de 3 sessões, conforme necessidade de troca da medicação in" },
+    { code: "AA", name: "Alveoplastia", description: "Cirurgia que corrige o osso que sustenta os dentes. Realizada normalmente após a extração de múltiplos dentes ou quando há necessidade de colocar uma prótese e osso está irregular. [Direcion" },
+    { code: "AB", name: "Ajuste Oclusal por Desgaste Seletivo", description: "Este procedimento estará incluído no valor das restaurações. Os dentistas divulgados na especialidade de periodontia podem solicitar este código, será admitido no máximo 3 sessões para benef" },
+    { code: "AC", name: "Aplicação de Selante em Fóssulas Fissuras", description: "O selante é um material colocado em dentes com sulcos muito profundos para proteger contra a cárie dentária. A aplicação dos selantes consiste num procedimento rápido e indolor. Geralmente i" },
+    { code: "AD", name: "Atividade Educativa para Pais E/ Cuidadores Dental Kids", description: "São orientações de higiene oral e dieta aos pacientes e cuidadores. Prazo de repetição: 4 meses. Utilizado somente para o plano específico Dental Kids [Direcionar: 19 Odontopediatria]" },
+    { code: "AE", name: "Aumento de Coroa Clínica", description: "Indicado para os dentes em que a gengiva impossibilita a execução da reabilitação de forma satisfatória e necessite de rebaixamento ósseo para recuperação do espaço biológico. Os dentistas d" },
+    { code: "AF", name: "Capeamento Pulpar Direto", description: "Proteção direta da polpa através de medicação local. Solicitado pelo endodontista conforme o dente afetado. Caso o CD clínico entre em contato relatando que não consegue visualizar o procedi" },
+    { code: "AG", name: "Cirurgia Ortognática Cirurgia Parendodôntica = Apicetomia- Cirurgia Periodontal a Retalho", description: "O procedimento de Cirurgia Ortognática refere-se a cirurgia oral maior realizada em Hospital. É considerado por sua vez de segmentação médica, portanto a análise de cobertura deve ser realiz" },
+    { code: "AH", name: "Clareamento para Dentes Desvitalizados", description: "Indicado para dentes anteriores e pré-molares. Máximo de 3 sessões. Realização somente em dentes com tratamento endodôntico satisfatório e comprovado escurecimento da porção coronária atravé" },
+    { code: "AI", name: "Consulta Odontológica Dental Kids", description: "Consulta para a avaliação dentária para crianças. Em caso de clínica multidisciplinar será permitida uma consulta de planejamento de tratamento. Utilizado somente para o plano específico Den" },
+    { code: "AJ", name: "Consulta Urgência em Consultório", description: "Realização de procedimentos de urgência em consultório. São considerados procedimentos de urgência pela ANS: • Curativo em caso de hemorragia bucal; • Curativo em caso de odontalgia aguda (p" },
+    { code: "AK", name: "Consulta Urgência em Pronto Socorro 24 Horas", description: "Realização de procedimentos de urgência e emergência. São considerados procedimentos de urgência pela ANS: • Curativo em caso de hemorragia bucal; • Curativo em caso de odontalgia aguda (pul" },
+    { code: "AL", name: "Coroa 3/4 ou 4/5", description: "Prótese unitária que reconstrói apenas 3 ou 4 faces do dente. Encontra- se ativo, porém com exigência de envio de rx para autorização, da mesma forma que outros procedimentos de prótese (COR" },
+    { code: "AM", name: "Coroa Total em Cerômero (dentes Anteriores)", description: "Indicado em dentes anteriores não passíveis de reconstrução por meio direto. Apenas para coroas unitárias, não utilizar para próteses parciais fixas. Necessário encaminhar imagem radiográfic" },
+    { code: "AN", name: "Coroa Total Metálica", description: "Prótese unitária feita em metal que reconstrói totalmente o dente. Indicado em dentes não passíveis de reconstrução por meio direto. Apenas para coroas unitárias; não utilizar para próteses " },
+    { code: "AO", name: "Coroa Total Metalo Cerâmica (porcelana)", description: "Indicado em dentes não passíveis de reconstrução por meio direto. Apenas para coroas unitárias; não utilizar para próteses parciais fixas. Imagem radiográfica final compatível com metal e po" },
+    { code: "AP", name: "Coroa Total Metalo Plástica Cerômero", description: "Indicado em dentes não passíveis de reconstrução por meio direto. Apenas para coroas unitárias; não utilizar para próteses parciais fixas. Imagem radiográfica final compatível com metal e Ce" },
+    { code: "AQ", name: "Coroa Total Metalo Plástica Resina Acrílica", description: "Indicado em dentes não passíveis de reconstrução por meio direto. Apenas para coroas unitárias; não utilizar para próteses parciais fixas. Imagem radiográfica final compatível com metal e re" },
+    { code: "AR", name: "Coroas em Dente Decíduo", description: "Para pacientes menores de 13 anos de idade. “Indicado para perdas precoces de dentes decíduos. ” [Direcionar: 19 Odontopediatria]" },
+    { code: "AS", name: "Cunha Proximal", description: "É a remoção de porção óssea atrás do último dente da mandíbula que está impedindo o dente de erupcionar ou dificultando o preparo e a higiene (remoção de osso e tecido mole-gengiva). É neces" },
+    { code: "AT", name: "Coroa Provisória sem Pino", description: "Procedimento indicado apenas para coroas unitárias. Não utilizar para próteses parciais fixas. Solicitamos formalizar a orientação da importância da reabilitação definitiva ao beneficiário, " },
+    { code: "AU", name: "Coroa Provisória com Pino", description: "Dente artificial em resina acrílica com pino para ser usado por um período até a confecção do definitivo. Procedimento indicado apenas para coroas unitárias; Não utilizar para próteses parci" },
+    { code: "AV", name: "Coroa Total Acrílica Prensada", description: "Coroa unitária que reconstrói totalmente o dente, confeccionada em acrílica prensada: Indicado em dentes não passíveis de reconstrução por meio direto. Apenas para coroas unitárias; não util" },
+    { code: "AW", name: "Dente Supranumerário", description: "Qualquer dente que exceda o número normal de dentes é denominado extranumerário. Será solicitado o código normal do procedimento e quando for selecionar o dente, o supranumerário será lançad" },
+    { code: "AX", name: "Documentação Ortodôntica Básica", description: "É um conjunto de exames complementares que auxiliam o profissional no tratamento ortodôntico. Procedimento inclui a Radiografia panorâmica, 5 fotos, 2 radiografias periapicais, 2 radiografia" },
+    { code: "AY", name: "Documentação Ortodôntica Completa", description: "É um conjunto de exames complementares que auxiliam o profissional no tratamento ortodôntico. Procedimento inclui a Radiografia panorâmica, 1 telerradiografia com traçado, 1 traçado adiciona" },
+    { code: "AZ", name: "Documentação Ortodôntica Especia", description: "É um conjunto de exames complementares que auxiliam o profissional no tratamento ortodôntico. Procedimento inclui a Radiografia panorâmica, 1 telerradiografia com traçado, 1 traçado adiciona" },
+    { code: "BA", name: "Documentação Ortodôntica Simple", description: "É um conjunto de exames complementares que auxiliam o profissional no tratamento ortodôntico. Procedimento inclui a Radiografia panorâmica, 1 telerradiografia com traçado, 1 traçado adiciona" },
+    { code: "BB", name: "Endodontia com Instrumento", description: "Técnicas cirúrgicas utilizadas para cobrir a raiz dos dentes nos casos em que haja grande perda da gengiva. Procedimento inclui curativos pós-cirúrgicos, incisão e reposicionamentos de tecid" },
+    { code: "BC", name: "Exérese ou Excisão de Cistos Odontológicos", description: "Remoção cirúrgica de cistos (lesão óssea) localizados na boca [Direcionar:  Cirurgia]" },
+    { code: "BD", name: "Exodontia de Permanente por", description: "Exodontia de resto radicular [Direcionar: 01 Cirurgia]" },
+    { code: "BE", name: "Exodontia Simples de Permanente", description: "Exodontia simples [Direcionar: 01 Cirurgia]" },
+    { code: "BF", name: "Exérese ou Excisão de Mucocele", description: "É a remoção cirúrgica de um pequeno cisto benigno (bolha) na boca, geralmente no lábio inferior. [Direcionar: 01 Cirurgia]" },
+    { code: "BG", name: "Faceta em Cerâmica Pura", description: "Faceta em cerâmica [Direcionar:  Dentística Restauradora, Prótese ou Odontologia]" },
+    { code: "BH", name: "Faceta em Resina Direta", description: "Recobrimento estético direto (feito no consultório) com resinas sobre a face externa dos dentes, podendo ser realizado em uma única sessão (é uma restauração que recobre o dente). [Direciona" },
+    { code: "BI", name: "Frenulectomia Labial ou Lingual", description: "Este procedimento consiste na remoção do freio labial ou lingual. Os procedimentos Frenulectomia labial e frenulectomia lingual (retirada total do tecido) estão vinculados à especialidade Od" },
+    { code: "BJ", name: "Frenulotomia", description: "O procedimento frenulotomia labial e, frenulotomia lingual (retirada parcial do tecido) estão vinculados à especialidade cirurgia. Necessário o envio de laudo com parecer clínico ou hipótese" },
+    { code: "BK", name: "Implante Ortodôntico", description: "O implante ortodôntico são estruturas, geralmente feitas de titânio e utilizadas como recurso bastante atual e atuam para auxiliar na ancoragem e/ou correção de várias situações corriqueiras" },
+    { code: "BL", name: "Mantenedor de Espaço Fixo", description: "O mantenedor de espaço é uma peça fixa feito sob medida em acrílico ou metal pelo dentista, odontopediatria ou ortodontista para manter o espaço para erupção do dente permanente no lugar cer" },
+    { code: "BM", name: "Núcleo Metálico Fundido", description: "Pino que vai dentro da raiz para retenção da coroa. Confeccionado em laboratório protético. Procedimento inclui remoção parcial de material obturador radicular e preparo para núcleo. Necessá" },
+    { code: "BN", name: "Núcleo de Fibra de Vidro ou Fibr de Carbono Mais Preenchimento", description: "Procedimento inclui remoção parcial de material obturador radicular e preparo para núcleo. Necessário encaminhar imagem radiográfica inicial para análise de autorização e final para análise " },
+    { code: "BO", name: "Prevenção Módulo 1 - Dental Kid", description: "Procedimento inclui raspagem supra-gengival, profilaxia, adequação do meio, atividade educativa, evidenciação de placa e aplicação tópica de flúor; Procedimento realizado em pacientes menore" },
+    { code: "BP", name: "Prótese Parcial Fixa em Metalo Cerâmica", description: "prótese para substituir dentes ausentes com preparos minimente invasivos dos dentes pilares, basicamente a nível de esmalte, e fixação com cimentos resinosos. O prestador deverá encaminhar i" },
+    { code: "BQ", name: "Prótese Parcial Fixa em Metalo Plástica", description: "As próteses metaloplástica são resinas conjugadas a uma estrutura de metal para reforço interno da prótese. O prestador deverá encaminhar imagem radiográfica inicial onde deverá possibilitar" },
+    { code: "BR", name: "Prótese Parcial Fixa In Ceran L de Metal (metal Free)", description: "As próteses metal free são feitas de porcelana, o que permite que o dente fique de uma só cor, diminuindo a possibilidade de manchas cinzas aparecerem próximas à gengiva, já que as estrutura" },
+    { code: "BS", name: "Prótese Parcial Fixa Provisória", description: "é uma parte importante do tratamento reabilitador, sendo uma fase intermediária necessária para a confecção das próteses definitivas. O prestador deverá encaminhar imagem radiográfica inicia" },
+    { code: "BT", name: "Prótese Parcial Removível C", description: "A prótese parcial removível é uma armação metálica com dentes artificiais que substituem os naturais, ausentes devido a perdas. Mesmo sendo uma alternativa móvel, a prótese parcial removível" },
+    { code: "BU", name: "Radiografia Oclusal em Clínica Radiológica", description: "Exame de imagem para auxiliar no diagnóstico do cirurgião-dentista feito em clínica radiológica. Para análise de pagamento, será necessário anexar no campo “imagem inicial” a imagem digitali" },
+    { code: "BV", name: "Telerradiografia", description: "Tecnica Radiografia para auxiliar no diagnóstico do tratamento ortodôntico [Direcionar: 22 Radiologia Odontológica e Imagiologia]" },
+    { code: "BW", name: "Radiografia Interproximal Bite- Wing em Clínica Radiológica", description: "Exame de imagem para auxiliar no diagnóstico do cirurgião-dentista feito em clínica radiológica. Para análise de pagamento, será necessário anexar no campo “imagem inicial” a imagem digitali" },
+    { code: "BX", name: "Radiografia Panorâmica de MANDÍBULA/MAXILA (ortopantomografia)", description: "É um exame para complementar o exame clínico no diagnóstico das doenças dos dentes (cáries ou doenças endodônticas) e dos ossos da face. Inclui laudo da panorâmica. Necessário enviar imagem " },
+    { code: "BY", name: "Radiografia Periapical em Clínic Radiológica", description: "Exame de imagem para auxiliar no diagnóstico do cirurgião-dentista feito em clínica radiológica. Para análise de pagamento, será necessário anexar no campo “imagem inicial” a imagem digitali" },
+    { code: "BZ", name: "Radiologia e Imaginologia Recimentação de Trabalho Protético", description: "é a especialidade que tem como objetivo a aplicação dos métodos exploratórios por imagem com a finalidade de diagnóstico, acompanhamento e documentação do complexo bucomaxilofacial e estrutu" },
+    { code: "CA", name: "Remoção de Cálculo", description: "Procedimento responsável pela remoção de cálculo gengival [Direcionar: 05 Odontologia Preventiva]" },
+    { code: "CB", name: "Remoção de Núcleo Intrarradicular", description: "Consiste na remoção do núcleo da cavidade intrarradicular, com finalidade endodôntica. (Procedimento solicitado somente pelo endodontista) [Direcionar: 03 Endodontia]" },
+    { code: "CC", name: "Restauração em Cerâmica Pura – Inlay", description: "Restauração feita em porcelana em laboratório de prótese [Direcionar: 07 Prótese]" },
+    { code: "CD", name: "Restauração em Cerâmica Pura – Onlay", description: "Restauração de grande extensão com envolvimento de cúspides feita em porcelana em laboratório de prótese. [Direcionar: 07 Prótese]" },
+    { code: "CE", name: "Restauração Metálica Fundida", description: "Restauração em metal realizada em laboratório de prótese. Procedimento não autorizado para dentes que apresentam grande destruição coronária, que contraindiquem preparos parciais. Necessário" },
+    { code: "CF", name: "Retratamento Endodôntico", description: "Reconfecção do tratamento de endodôntico, ocasionado por uma reinfecção no canal (raiz) do dente, já tratado anteriormente. É realizada a remoção da obturação do canal, nova desinfecção e no" },
+    { code: "CG", name: "Sedação Consciente com Óxido Nitroso e Oxigênio em Odontologi", description: "Esta técnica consiste em realizar o tratamento odontológico com a inalação do óxido nitroso (N2O) associado ao oxigênio, através de um equipamento específico (fluxômetro) e de uma máscara na" },
+    { code: "CH", name: "Sedação Medicamentosa", description: "A sedação medicamentosa (por meio de fármacos) pode ser um método efetivo utilizado em pacientes ansiosos ou com medo do tratamento odontológico. Produz depressão mínima no nível de consciên" },
+    { code: "CI", name: "Técnica de Clark- Telerradiografia", description: "Este procedimento consiste na realização de 3 tomadas radiográficas (radiografia periapical), sendo uma em posição central, as demais variando a angulação para direita e para a esquerda (mes" },
+    { code: "CJ", name: "Tratamento de Perfuração Endodôntica", description: "Consiste no selamento (fechamento) de perfuração endodôntica com o material de escolha do profissional executante. [Direcionar: 03 Endodontia]" },
+    { code: "CK", name: "Tratamento Endodôntico", description: "Tratamento realizado na raiz (canal) do dente, com remoção do \"nervo\", desinfecção do canal e preenchimento da raiz com material obturador. Este tratamento é realizado tanto em dentes perman" },
+    { code: "CL", name: "Tratamento Endodôntico de Dente com Rizogênese Incompleta- Consulta Proc Ulectomia", description: "Dente com necessidade de intervenção endodôntica, mas que se apresenta com o ápice aberto (raiz do dente ainda não fechou). Máximo de 3 sessões, conforme necessidade de troca da medicação in" },
   ];
   const SEED_PROC_SCRIPTS = [
     { cat: "boleto", title: "Segunda via de boleto — enviada", text: "Beneficiário(a) {bnf} entrou em contato para solicitar a segunda via da fatura do(s) mês(es) {boleto}. Foi localizada a fatura e enviada com sucesso para [SMS/e-mail]. Orientado aos canais digitais site/app." },
@@ -824,6 +814,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let state = Store.load();
   C.reconcile(state);
+  // ===== HOMOLOGAÇÃO: outubro/2026 preenchido com atendimentos de exemplo, fixos (não editam, não apagam) =====
+  const HML = (id) => String(id || '').startsWith('hml_');
+  (function homologSeed() {
+    if ((state.data.history || []).some(r => HML(r.id)) || (state.data.archive || []).some(r => HML(r.id))) return;
+    let seed = 20261030;
+    const rnd = () => { seed = (seed * 1103515245 + 12345) % 2147483648; return seed / 2147483648; };
+    const procs = (state.data.procedures || []).filter(p => p.active !== false);
+    const nomes = ["Ana", "Bruno", "Carla", "Diego", "Elisa", "Fábio", "Gabriela", "Heitor", "Isabela", "João", "Karina", "Lucas", "Marina", "Nicolas", "Olívia", "Paulo", "Rafaela", "Sérgio", "Tatiana", "Vinícius"];
+    const horas = [8, 8, 9, 9, 9, 10, 10, 10, 11, 11, 11, 12, 12, 13, 13, 14, 14, 14, 15, 15, 15, 16, 16, 16, 17, 17, 17, 17, 18, 18];
+    const recs = [];
+    for (let d = 1; d <= 31; d++) {
+      const dow = new Date(2026, 9, d).getDay();
+      if (dow === 0 || d === 12) continue; // domingo e feriado: sem atendimento
+      const agora = new Date(); if (new Date(2026, 9, d) > agora) continue; // nada no futuro
+      const hojeMesmo = agora.getFullYear() === 2026 && agora.getMonth() === 9 && agora.getDate() === d;
+      const n = dow <= 3 ? 30 + Math.floor(rnd() * 11) : 20 + Math.floor(rnd() * 9); // seg-qua mais cheio, qui-sáb mais fraco
+      for (let i = 0; i < n; i++) {
+        const p = procs[Math.floor(rnd() * procs.length)];
+        const nome = nomes[Math.floor(rnd() * nomes.length)];
+        const hh = horas[Math.floor(rnd() * horas.length)], mm = Math.floor(rnd() * 60), ss = Math.floor(rnd() * 60);
+        if (hojeMesmo && hh > agora.getHours()) continue;
+        recs.push({ id: `hml_${d}_${i}`, createdAt: new Date(2026, 9, d, hh, mm, ss).toISOString(), attendant: "Atendente de homologação", bnfInitial: nome, protocol: "-", order: "-", procedures: [p ? p.title : "Sem classificação"], procedureIds: p ? [p.id] : [], note: `Beneficiário(a) ${nome} entrou em contato. Registro de exemplo do ambiente de homologação (${p ? p.title : "sem procedimento"}).`, homolog: true });
+      }
+    }
+    recs.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    state.data.history = [...recs, ...(state.data.history || [])];
+    if (state.data.settings) state.data.settings.retentionDays = 0;
+    Store.save(state);
+  })();
+
 
   function h(tag, props, ...children) {
     const el = document.createElement(tag);
@@ -831,7 +851,7 @@ document.addEventListener('DOMContentLoaded', () => {
       for (const [key, val] of Object.entries(props)) {
         if (key === 'className') el.className = val;
         else if (key.startsWith('on') && typeof val === 'function') el.addEventListener(key.substring(2).toLowerCase(), val);
-        else el.setAttribute(key, val);
+        else if (val !== undefined && val !== null && val !== false) el.setAttribute(key, val);
       }
     }
     children.forEach(child => {
@@ -917,6 +937,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     clock.innerHTML = `<span style="font-weight: 500;">${weekdayStr}, ${dateFormatted} - ${timeFormatted}</span> <span style="opacity: 0.8; margin-left: 8px;">| ${weatherText} | Atendimentos hoje: <strong>${todayCount}</strong></span>`;
     buildTicker();
+    window.addEventListener('resize', () => { const t = document.getElementById('ticker-track'); if (t) { t._sig = null; buildTicker(); } }, { once: false });
   }
 
   // Estatísticas de fluxo (reutilizado pelo ticker e pelo painel)
@@ -964,12 +985,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (track._sig === sig) return; // evita reiniciar a animação à toa
     track._sig = sig;
     const content = itens.map(t => `<span class="ti">${t}</span>`).join('');
-    track.innerHTML = content + content; // duplicado para loop contínuo
+    // Repete o conjunto até cobrir a largura da faixa; depois duplica pro loop (-50%) fechar sem buraco
+    track.innerHTML = content;
+    const larguraFaixa = (track.parentElement && track.parentElement.clientWidth) || 0;
+    const largura = track.scrollWidth || 1;
+    const rep = Math.max(1, Math.ceil(larguraFaixa / largura));
+    const grupo = content.repeat(rep);
+    track.innerHTML = grupo + grupo;
   }
 
   // ===== Aba Versões / Changelog =====
-  const APP_VERSION = "3.26";
+  const APP_VERSION = "3.27";
   const CHANGELOG = [
+    { v: "3.27", d: "30/10/2026", items: ["Calendário: a data inicial fica cravada; cliques seguintes só mudam a final (trocar a inicial = Limpar seleção). Regras escritas no painel", "Calendário: calculadora de carência de 12 meses — informa quando completa 365 dias e a partir de que data (15 dias antes) o encerramento pode ser pedido", "Calendário: clima atual ao lado da estimativa da semana; feriados, seletor e carência na coluna da direita. Botões de copiar com cor (corridos, úteis, ambos) e o dia atual na cor do hoje", "Cabeçalho das tabelas (VDN, histórico) cravado ao rolar", "Faixa de indicadores preenche a largura inteira, sem buraco no loop", "Correção: os botões Copiar corridos / úteis / ambos do calendário ficavam desabilitados mesmo com o período completo"] },
     { v: "3.26", d: "29/10/2026", items: ["Boleto: parâmetros numa linha só (mês, SMS, e-mail) e botão \"Acrescentar boleto\" pra mais de um mês — no prontuário vira \"10/2026 e também 11/2026\"", "Boleto: o envio sai em linhas próprias no fim do texto — \"SMS de cadastro enviado com sucesso\" e \"A solicitação de envio de e-mail foi cadastrada com sucesso\", uma embaixo da outra; o [SMS/e-mail] do texto vira o canal escolhido"] },
     { v: "3.25", d: "26/10/2026", items: ["Importação de TXT passou a preservar os procedimentos usados (não vira mais tudo \"Histórico Importado\") e casa os nomes com o catálogo para contarem no Top do painel", "Dark Mode: contraste corrigido nos elementos de fundo ciano (menu ⋮, janela ativa do painel, atalho Hoje/Mês inteiro e botões primários) — texto escuro sobre o ciano, legível"] },
     { v: "3.24", d: "26/10/2026", items: ["Hotfix: importação de relatório TXT voltou a funcionar — o leitor passou a aceitar a data com vírgula (\"DD/MM/AAAA, HH:MM:SS\") que o próprio sistema exporta; uma data estranha não derruba mais o import inteiro e o cabeçalho deixou de virar registro fantasma"] },
@@ -1141,6 +1169,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     state = JSON.parse(JSON.stringify(defaultState));
     Store.save(state);
+    setTimeout(() => location.reload(), 300); // homologação: recarrega e recria os exemplos de outubro
     window._weatherData = null;
     window._weatherLoadedCity = null;
 
@@ -1382,7 +1411,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const checkedBoxes = document.querySelectorAll('.history-row-checkbox:checked');
         if (checkedBoxes.length === 0) { showToast("Selecione pelo menos um atendimento para excluir.", "error"); return; }
         if (confirm(`Deseja realmente excluir os ${checkedBoxes.length} atendimentos selecionados?`)) {
-          const idsToRemove = Array.from(checkedBoxes).map(cb => cb.getAttribute('data-id'));
+          const idsToRemove = Array.from(checkedBoxes).map(cb => cb.getAttribute('data-id')).filter(id => !HML(id));
           state.data.history = state.data.history.filter(i => !idsToRemove.includes(i.id));
           state.data.archive = state.data.archive.filter(i => !idsToRemove.includes(i.id));
           Store.save(state);
@@ -1404,8 +1433,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (total === 0) { showToast("Não há relatórios para apagar.", "error"); return; }
         if (!confirm(`⚠️ ATENÇÃO: isto vai APAGAR TODOS os ${total} relatórios (histórico + arquivo), de forma permanente.\n\nProcedimentos, ABC e VDN são mantidos. Deseja continuar?`)) return;
         if (!confirm("Confirmação final: apagar TODOS os relatórios? Esta ação não pode ser desfeita.")) return;
-        state.data.history = [];
-        state.data.archive = [];
+        state.data.history = state.data.history.filter(i => HML(i.id));
+        state.data.archive = state.data.archive.filter(i => HML(i.id));
         Store.save(state);
         renderHistory();
         initDashboardFiltersAndRender();
@@ -2517,6 +2546,7 @@ document.addEventListener('DOMContentLoaded', () => {
         className: 'btn-danger', style: 'padding:2px 6px; font-size:0.7rem;',
         onClick: (e) => {
           e.stopPropagation();
+          if (HML(r.id)) { showToast("Registro de exemplo da homologação: não pode ser excluído.", "error"); return; }
           if (confirm("Excluir este atendimento?")) {
             state.data.history = state.data.history.filter(i => i.id !== r.id);
             state.data.archive = state.data.archive.filter(i => i.id !== r.id);
@@ -2572,6 +2602,7 @@ document.addEventListener('DOMContentLoaded', () => {
               h('button', {
                 className: 'btn-primary', style: 'font-size: 0.7rem;',
                 onClick: () => {
+                  if (HML(r.id)) { showToast("Registro de exemplo da homologação: não pode ser alterado.", "error"); return; }
                   const newNote = document.getElementById(`note-input-${r.id}`).value;
                   let target = state.data.history.find(item => item.id === r.id) || state.data.archive.find(item => item.id === r.id);
                   if (target) {
@@ -2603,18 +2634,43 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function selectRangeDate(date) {
-    if (!window.calRangeStart || (window.calRangeStart && window.calRangeEnd)) {
+    // A data inicial fica cravada até "Limpar seleção"; cliques seguintes só mudam a final
+    if (!window.calRangeStart) {
       window.calRangeStart = date;
       window.calRangeEnd = null;
+    } else if (date < window.calRangeStart) {
+      window.calRangeEnd = window.calRangeStart;
+      window.calRangeStart = date;
     } else {
-      if (date < window.calRangeStart) {
-        window.calRangeEnd = window.calRangeStart;
-        window.calRangeStart = date;
-      } else {
-        window.calRangeEnd = date;
-      }
+      window.calRangeEnd = date;
     }
     renderCalendar();
+  }
+
+  // Calculadora de carência: 365 dias a partir da adesão; o encerramento pode ser pedido 15 dias antes
+  window.calAdesao = window.calAdesao || "";
+  function buildCarenciaPanel() {
+    const card = h('div', { className: 'card', style: 'padding: 0.8rem; margin-top:0.8rem;' });
+    card.appendChild(h('h3', { style: 'font-size: 0.85rem; font-weight: bold; color: var(--primary); margin-bottom:0.3rem;' }, 'Carência de 12 meses'));
+    const input = h('input', { type: 'date', value: window.calAdesao, style: 'width:100%; padding:0.3rem 0.4rem; border:1px solid var(--border-color); border-radius:var(--radius); background:var(--surface-alt); font-size:0.8rem;' });
+    input.addEventListener('change', () => { window.calAdesao = input.value; renderCalendar(); });
+    card.appendChild(h('div', { className: 'form-group' }, h('label', {}, 'Data de adesão do plano'), input));
+    if (window.calAdesao) {
+      const ad = new Date(window.calAdesao + 'T00:00:00');
+      const fim = new Date(ad); fim.setDate(fim.getDate() + 365);
+      const pode = new Date(fim); pode.setDate(pode.getDate() - 15);
+      const hoje = new Date(); hoje.setHours(0, 0, 0, 0);
+      const faltam = Math.ceil((pode - hoje) / 86400000);
+      card.appendChild(h('div', { className: 'carencia-row' }, h('span', {}, 'Completa 365 dias em'), h('strong', {}, formatBR(fim))));
+      card.appendChild(h('div', { className: 'carencia-row' }, h('span', {}, 'Pode pedir encerramento a partir de'), h('strong', {}, formatBR(pode))));
+      card.appendChild(h('div', { className: 'carencia-row' }, h('span', {}, 'Situação hoje'), h('strong', { style: faltam > 0 ? 'color:var(--danger);' : 'color:var(--success);' }, faltam > 0 ? `faltam ${faltam} dias` : 'carência cumprida')));
+      card.appendChild(h('div', { className: 'range-btns' },
+        h('button', { className: 'dashboard-btn rb-ambos', onClick: () => navigator.clipboard.writeText(`Adesão em ${formatBR(ad)}: completa 12 meses em ${formatBR(fim)}; encerramento pode ser solicitado a partir de ${formatBR(pode)}.`).then(() => showToast('Copiado!', 'success')) }, 'Copiar resumo'),
+        h('button', { className: 'btn-secondary', style: 'font-size:0.68rem; padding:0.28rem 0.45rem;', onClick: () => { window.calAdesao = ''; renderCalendar(); } }, 'Limpar')
+      ));
+    }
+    card.appendChild(h('p', { className: 'cal-regras' }, 'Regra: a carência é de 365 dias contados da adesão; o pedido de encerramento pode ser feito 15 dias antes de completar.'));
+    return card;
   }
 
   function buildWeatherCard() {
@@ -2675,12 +2731,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function buildRangePanel() {
     const card = h('div', { className: 'card', style: 'padding: 0.8rem;' });
+    card.style.marginTop = '0.8rem';
     card.appendChild(h('h3', { style: 'font-size: 0.85rem; font-weight: bold; color: var(--primary); margin-bottom:0.3rem;' }, 'Seletor de Período'));
 
     const s = window.calRangeStart, e = window.calRangeEnd;
 
     if (!s) {
-      card.appendChild(h('p', { className: 'hint' }, 'Clique em uma data para a data inicial e em outra para a final.'));
+      card.appendChild(h('p', { className: 'hint' }, 'Clique em uma data para a data inicial e em outra para a final. A inicial fica cravada até limpar.'));
     } else if (!e) {
       card.appendChild(h('p', { style: 'font-size:0.78rem;' }, `Data inicial: ${formatBR(s)}`));
       card.appendChild(h('p', { className: 'hint' }, 'Agora clique na data final.'));
@@ -2702,8 +2759,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const btns = h('div', { className: 'range-btns' });
 
-    const mkCopy = (label, textFn, enabled) => h('button', {
-      className: 'dashboard-btn',
+    const mkCopy = (label, textFn, enabled, cls) => h('button', {
+      className: 'dashboard-btn ' + (cls || ''),
       disabled: enabled ? undefined : 'disabled',
       style: enabled ? '' : 'opacity:0.5; cursor:not-allowed;',
       onClick: () => {
@@ -2712,11 +2769,11 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, label);
 
-    btns.appendChild(mkCopy('Copiar corridos', () => `${corridos} dias corridos`, complete));
-    btns.appendChild(mkCopy('Copiar úteis', () => `${uteis} dias úteis`, complete));
-    btns.appendChild(mkCopy('Copiar ambos', () => `Período de ${periodoStr}: ${corridos} dias corridos / ${uteis} dias úteis`, complete));
+    btns.appendChild(mkCopy('Copiar corridos', () => `${corridos} dias corridos`, complete, 'rb-corridos'));
+    btns.appendChild(mkCopy('Copiar úteis', () => `${uteis} dias úteis`, complete, 'rb-uteis'));
+    btns.appendChild(mkCopy('Copiar ambos', () => `Período de ${periodoStr}: ${corridos} dias corridos / ${uteis} dias úteis`, complete, 'rb-ambos'));
     btns.appendChild(h('button', {
-      className: 'dashboard-btn',
+      className: 'dashboard-btn rb-hoje',
       onClick: () => {
         const hoje = formatBR(new Date());
         navigator.clipboard.writeText(hoje).then(() => showToast(`Dia atual copiado: ${hoje}`, "success"));
@@ -2729,6 +2786,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 'Limpar seleção'));
 
     card.appendChild(btns);
+    card.appendChild(h('p', { className: 'cal-regras' }, 'Como funciona: o 1º clique marca a data inicial e fica cravado; os cliques seguintes só mudam a data final. Pra trocar a inicial, use "Limpar seleção" e refaça.'));
     return card;
   }
 
@@ -2930,12 +2988,15 @@ document.addEventListener('DOMContentLoaded', () => {
       holidaysUl
     );
 
-    const rightCol = h('div', {}, buildWeatherCard(), cardHolidays, buildRangePanel());
+    cardHolidays.style.marginTop = '0';
+    const rightCol = h('div', {}, cardHolidays, buildRangePanel(), buildCarenciaPanel());
 
-    // Estimativa semanal de clima (somente na visão de dias)
+    // Embaixo do calendário: estimativa da semana e clima atual, lado a lado
     const leftCol = h('div', {}, cardCal);
     if (window.calViewMode === 'days') {
-      leftCol.appendChild(buildWeeklyWeather(year, month));
+      leftCol.appendChild(h('div', { className: 'cal-bottom' }, buildWeeklyWeather(year, month), buildWeatherCard()));
+    } else {
+      leftCol.appendChild(h('div', { className: 'cal-bottom' }, buildWeatherCard()));
     }
 
     const layoutGrid = h('div', { style: 'display: grid; grid-template-columns: 2fr 1fr; gap: 0.8rem; align-items:start;' }, leftCol, rightCol);
