@@ -324,7 +324,7 @@ main {
 
 /* Catálogo de Procedimentos com altura fixa para até 5 itens visíveis + scroll */
 .procedures-list {
-  max-height: 205px;
+  max-height: 410px;
   overflow-y: auto;
   display: flex;
   flex-direction: column;
@@ -1030,6 +1030,52 @@ dialog::backdrop {
   font-size: 0.78rem; cursor: pointer; white-space: nowrap;
 }
 .chk-inline input[type="checkbox"] { width: 14px; height: 14px; accent-color: var(--primary); }
+
+/* Contatos (Telefone / E-mail) com menu ⋮ (copiar / apagar) */
+.contato-wrap { display: flex; align-items: center; gap: 0.3rem; flex: 1; }
+.contato-wrap input { flex: 1; min-width: 0; }
+
+/* Cobertura — lista de coberturas (procedimento 70% + cobre/carência + X) */
+.cobertura-row { border-bottom: 1px dashed var(--border-light); padding-bottom: 0.45rem; margin-bottom: 0.45rem; }
+.cobertura-row:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.cob-row-top { display: flex; align-items: center; gap: 0.5rem 0.7rem; flex-wrap: wrap; }
+.cob-nome {
+  flex: 1 1 60%; min-width: 170px;
+  padding: 0.35rem 0.5rem; border: 1px solid var(--border-color);
+  border-radius: var(--radius); background: var(--surface-color); color: var(--text-main);
+}
+.cob-nome:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 2px rgba(45,212,191,0.15); }
+.cob-chk { flex: 0 0 auto; font-size: 0.74rem; }
+.cob-x {
+  flex: 0 0 auto; width: 24px; height: 24px; line-height: 1;
+  border: 1px solid var(--danger); color: var(--danger); background: transparent;
+  border-radius: var(--radius); cursor: pointer; font-size: 1rem; font-weight: bold;
+}
+.cob-x:hover { background: var(--danger); color: #fff; }
+.cob-data { display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.4rem; padding-left: 0.1rem; }
+.cob-data > label { font-size: 0.74rem; font-weight: 600; color: var(--text-muted); }
+.cob-data-input {
+  padding: 0.3rem 0.45rem; border: 1px solid var(--border-color);
+  border-radius: var(--radius); background: var(--surface-color); color: var(--text-main);
+}
+.cob-data-hint { font-size: 0.68rem; color: var(--text-muted); font-style: italic; }
+
+/* Legenda de chaves & atalhos (abaixo do catálogo) */
+.chaves-legenda { margin-top: 0.6rem; border-top: 1px solid var(--border-light); padding-top: 0.5rem; }
+.chaves-legenda > summary {
+  cursor: pointer; font-size: 0.76rem; font-weight: bold; color: var(--primary);
+  list-style: none; user-select: none;
+}
+.chaves-legenda > summary::-webkit-details-marker { display: none; }
+.chaves-legenda > summary::before { content: '▸ '; font-size: 0.7rem; }
+.chaves-legenda[open] > summary::before { content: '▾ '; }
+.chaves-legenda-body { font-size: 0.74rem; color: var(--text-main); padding: 0.4rem 0.2rem 0.1rem; }
+.chaves-legenda-body .cl-titulo { font-weight: bold; color: var(--text-muted); text-transform: uppercase; font-size: 0.64rem; letter-spacing: 0.03em; margin: 0.5rem 0 0.15rem; }
+.chaves-legenda-body ul { margin: 0.1rem 0 0.2rem; padding-left: 1.1rem; display: flex; flex-direction: column; gap: 0.2rem; }
+.chaves-legenda-body code {
+  background: var(--surface-alt); border: 1px solid var(--border-light);
+  border-radius: 4px; padding: 0 0.25rem; font-size: 0.72rem; color: var(--primary); font-family: monospace;
+}
 
 /* Heatmaps comparativos do dashboard */
 .heatmap-table { border-collapse: collapse; width: 100%; font-size: 0.7rem; }

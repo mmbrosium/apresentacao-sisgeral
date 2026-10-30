@@ -130,6 +130,8 @@
               <div class="form-group">
                 <label for="field-bnf">Nome do Beneficiário (Opcional)</label>
                 <input type="text" id="field-bnf" placeholder="Nome completo">
+                <label class="chk-inline" style="margin-top:0.25rem;"><input type="checkbox" id="field-terceiros-check"> Terceiros?</label>
+                <input type="text" id="field-terceiro" placeholder="Nome do terceiro" style="display:none; margin-top:0.25rem;">
                 <span class="hint">🔒 O primeiro nome é guardado no registro.</span>
               </div>
               <div class="form-group">
@@ -158,6 +160,26 @@
               </label>
             </div>
             <div class="procedures-list" id="procedures-container"></div>
+
+            <details class="chaves-legenda">
+              <summary>❔ Chaves &amp; atalhos — como preencher no automático</summary>
+              <div class="chaves-legenda-body">
+                <p class="cl-titulo">No editor de procedimento</p>
+                <p>Escreva a chave e o sistema troca pelos dados do atendimento no texto compilado:</p>
+                <ul>
+                  <li><code>{bnf}</code> nome do beneficiário · <code>{pedido}</code> / <code>{guia}</code> nº do pedido · <code>{protocolo}</code> · <code>{atendente}</code></li>
+                  <li>Marcando <b>Terceiros?</b> (ao lado do nome), o prontuário vira "Terceiro(a) <code>{tcr}</code>, em nome do(a) beneficiário(a) <code>{bnf}</code>…"</li>
+                  <li><code>{boleto}</code> mês de ref. · <code>{abc}</code> / <code>{uf}</code> / <code>{city}</code> / <code>{bm}</code> rede · <code>{vdn}</code> setor · <code>{cobertura}</code> · <code>{validade_120}</code> (hoje + 120 dias)</li>
+                  <li>O que você digita na hora fica entre colchetes: <code>[valor]</code>, <code>[data]</code>, <code>[mês]</code></li>
+                </ul>
+                <p class="cl-titulo">Atalhos no prontuário (texto compilado)</p>
+                <ul>
+                  <li>Digite <code>{bnf}</code> <b>ou</b> <code>bnf*</code> (sigla + estrela) e vira o nome do beneficiário na hora.</li>
+                  <li>Vale também para <code>pedido*</code>, <code>protocolo*</code> e <code>atendente*</code> — ou com chaves: <code>{pedido}</code>, <code>{protocolo}</code>, <code>{atendente}</code>.</li>
+                  <li>Só dispara com a sigla certa + o gatilho, então texto normal nunca quebra.</li>
+                </ul>
+              </div>
+            </details>
           </div>
         </div>
 
@@ -217,26 +239,15 @@
           <div class="card param-block" id="cobertura-block-container" style="display: none;">
             <h3>Cobertura</h3>
             <datalist id="cobertura-sugestoes"></datalist>
-            <div class="form-group">
-              <label for="cobertura-1">Procedimento / cobertura</label>
-              <input type="text" id="cobertura-1" list="cobertura-sugestoes" placeholder="Digite ou busque (ex: Prótese, Canal...)" autocomplete="off">
-            </div>
-            <div class="form-group" id="cobertura-2-group" style="display: none;">
-              <label for="cobertura-2">2ª cobertura (opcional)</label>
-              <input type="text" id="cobertura-2" list="cobertura-sugestoes" placeholder="Digite ou busque..." autocomplete="off">
-            </div>
+            <div id="cobertura-rows"></div>
             <button id="btn-add-cobertura" class="btn-secondary" style="font-size: 0.7rem; padding: 0.2rem 0.5rem; align-self: flex-start;">+ Adicionar cobertura</button>
-            <div class="param-envio">
-              <label class="chk-inline"><input type="checkbox" id="cobertura-cobre" checked> Plano cobre?</label>
-              <label class="chk-inline"><input type="checkbox" id="cobertura-carencia"> Em carência?</label>
-            </div>
           </div>
 
           <div class="card">
             <div style="display: flex; justify-content: space-between; align-items: center;">
               <h2>Prontuário do Atendimento</h2>
               <div style="display: flex; gap: 0.3rem; align-items: center;">
-                <span id="manual-edited-badge" class="badge-cat badge-relevante" style="display: none;">Editado manualmente</span>
+                <span id="manual-edited-badge" class="badge-cat badge-boleto" style="display: none;">✏️ Texto manual ou parcial</span>
                 <button id="btn-recompile" class="btn-secondary" style="font-size: 0.7rem; padding: 0.15rem 0.35rem;" title="Recompor automático">🔄 Recompor</button>
               </div>
             </div>
@@ -244,8 +255,8 @@
             <div class="form-group">
               <label>Contatos para Envio (Memória de Tela)</label>
               <div class="form-row">
-                <input type="text" id="screen-phone" placeholder="Telefone">
-                <input type="text" id="screen-email" placeholder="E-mail">
+                <div class="contato-wrap"><input type="text" id="screen-phone" placeholder="Telefone"><span id="phone-menu-host"></span></div>
+                <div class="contato-wrap"><input type="text" id="screen-email" placeholder="E-mail"><span id="email-menu-host"></span></div>
               </div>
             </div>
 
