@@ -3,11 +3,11 @@ window.SOBRE_FOTOS = [];
 window.SOBRE_MD = `
 ## Em uma página {Resumo}
 
-O SisGeral é um gerenciador de atendimento que roda num arquivo HTML aberto no navegador, sem instalar nada, sem servidor e sem se conectar a nenhum sistema da empresa. Eu construí pra resolver um problema do meu próprio posto: no cancelamento de plano, escrever o registro tomava metade do atendimento, e o registro é praticamente o mesmo em todo cancelamento. Hoje ele faz o registro em um clique, guarda o histórico, exporta tudo em texto e me mostra a minha produtividade, dia a dia, sem depender de relatório de ninguém.
+<div class="tres"><div><b>O que é</b>Um gerenciador de atendimento que roda num arquivo HTML aberto no navegador. Sem instalar, sem servidor, sem se conectar a nenhum sistema da empresa.</div><div><b>Por que existe</b>No cancelamento de plano, escrever o registro tomava metade do atendimento, e o registro é quase igual em todo cancelamento. O mesmo vale pra dezenas de outros procedimentos, cada um com texto, orientação e artigo certos, guardados de memória.</div><div><b>O que mudou</b>O registro sai em um clique, já no padrão, com a orientação do procedimento na tela. O atendimento caiu de 5–10 minutos pra menos de 5. O histórico e a produtividade do mês ficam à mão, sem esperar relatório.</div></div>
 
-<div class="destaques"><div><b>1 clique</b><span>registro de cancelamento, antes texto digitado</span></div><div><b>&lt; 5 min</b><span>atendimento, antes 5 a 10</span></div><div><b>98</b><span>procedimentos no catálogo</span></div><div><b>v3.25</b><span>mais de cinquenta versões, com histórico dentro do sistema</span></div></div>
+<div class="destaques"><div><b>1 clique</b><span>registro de cancelamento, antes texto digitado</span></div><div><b>&lt; 5 min</b><span>atendimento, antes 5 a 10</span></div><div><b>86</b><span>procedimentos no catálogo, cada um com texto e orientação</span></div><div><b>v3.29</b><span>mais de cinquenta versões em uso real, com histórico dentro do sistema</span></div></div>
 
-Esta página explica o que ele é, como funciona, o que respeita e o que seria preciso pra levar ao time, se fizer sentido. Tudo que aparece nas telas é a base de outubro, com nomes de beneficiários reduzidos ao primeiro nome. Qualquer tela abre ampliada com um clique; nas principais, os pontos numerados explicam o que é cada parte.
+Eu construí pra resolver um problema do meu próprio posto e uso todo dia. Esta página diz o que ele é, por que existe, o que respeita e o que seria preciso pra levar ao time, se fizer sentido. O detalhe de cada tela vem depois, pra quem quiser aprofundar. Tudo que aparece nas telas é a base de outubro, com nomes de beneficiários reduzidos ao primeiro nome. Qualquer tela abre ampliada com um clique; nas principais, os pontos numerados explicam cada parte.
 
 ![A tela de trabalho: identificação, catálogo de procedimentos e o prontuário compilado](telas/01-novo-atendimento.png)
 
@@ -19,9 +19,41 @@ O mesmo vale pra dezenas de outros procedimentos: segunda via de boleto, indica�
 
 O ambiente não permite instalar programa nem integrar nada. Então a solução tinha que caber numa janela do navegador, como uma página qualquer.
 
-## O que é {O que é}
+## O que deu {Resultados}
 
-Um arquivo HTML com seis abas. As quatro primeiras são a rotina; as duas últimas, consulta.
+Em números do meu posto, outubro de 2026:
+
+- Registro de cancelamento: de texto digitado a um clique.
+- Atendimento: de 5 a 10 minutos pra menos de 5.
+- Procedimento seguido com apoio na tela, não de memória.
+- Histórico próprio, exportável, com painel de produtividade.
+- Mais de cinquenta versões em uso real, com os erros corrigidos no caminho.
+
+## O que ele respeita {Regras}
+
+- **Não instala nada e não se conecta a nada.** É uma página aberta no navegador. Não há servidor, não há integração com sistema da empresa, não há envio de dado pra fora.
+- **Os dados ficam na máquina.** O histórico fica no armazenamento local do navegador e só sai quando o atendente exporta. Apagar é um botão.
+- **Ele reforça o procedimento, não substitui.** A validação de dados vem antes de tudo, o artigo a verbalizar está na orientação, o texto do registro segue o padrão. O sistema da empresa continua sendo o registro oficial: o SisGeral prepara o texto, quem registra lá é o atendente.
+- **Tudo é auditável.** Cada versão está no histórico de versões, cada registro tem data e hora, e a exportação em texto pode ser lida por qualquer pessoa.
+- **Guarda o mínimo.** Primeiro nome do beneficiário, protocolo e pedido. Dado sensível não precisa ficar guardado pro sistema funcionar: não é guardado.
+
+![Histórico de versões, dentro do próprio sistema](telas/21-versoes.png)
+
+## Se fizer sentido pro time {Pro time}
+
+O que seria preciso, na ordem:
+
+1. **Validar as regras com quem decide**: o que pode ficar guardado localmente, por quanto tempo, e se o uso do navegador pra isso está dentro do permitido.
+2. **Revisar o catálogo com a qualidade**: os 86 procedimentos foram escritos por mim, da minha prática. Uma revisão de quem monitora garante que o texto base e a orientação são o padrão da operação.
+3. **Um arquivo por atendente**, com o nome configurado. Não precisa de instalação: é copiar a pasta. A que acompanha esta apresentação é a versão em uso, pra abrir e testar.
+4. **Uma hora de treinamento**: a rotina cabe em quatro cliques, e o resto é consulta.
+5. **Um ponto de retorno**: o que não está no catálogo vira pedido de procedimento novo, e eu mantenho.
+
+Nada disso depende de TI nem de compra. O custo é tempo de revisão. O ganho é minutos por atendimento, em cada atendimento, e um registro que sai igual pra todo mundo.
+
+## O que é, tela a tela {Telas}
+
+Daqui em diante é o detalhe. Um arquivo HTML com seis abas. As quatro primeiras são a rotina; as duas últimas, consulta.
 
 - **Novo Atendimento**: identificação, catálogo de procedimentos e prontuário compilado.
 - **Histórico & Arquivo**: tudo que foi registrado, com filtros, exportação e importação em texto.
@@ -34,7 +66,7 @@ Um arquivo HTML com seis abas. As quatro primeiras são a rotina; as duas últim
 
 A tela abre zerada, só com o nome do atendente. O nome do beneficiário é obrigatório, sempre. Protocolo entra quando o caso vira chamado interno; pedido ou guia, quando houver.
 
-O coração é o **catálogo de procedimentos**: 98 hoje, um por linha, com categoria e grupo, busca por nome ou conteúdo. Marcou a caixa, o texto do procedimento entra no prontuário, já com o nome do beneficiário e o número do pedido no lugar certo. Passando o mouse, dá pra ler o texto antes de marcar.
+O coração é o **catálogo de procedimentos**: 86 hoje, um por linha, com categoria e grupo, busca por nome ou conteúdo. Marcou a caixa, o texto do procedimento entra no prontuário, já com o nome do beneficiário e o número do pedido no lugar certo. Passando o mouse, dá pra ler o texto antes de marcar.
 
 ![Passando o mouse, o procedimento mostra o texto que vai pro prontuário](telas/02-catalogo-hover.png)
 
@@ -96,43 +128,13 @@ As **configurações** cabem numa janela: nome padrão do atendente (o que vem p
 
 ![O mesmo sistema no tema claro, com a aba Versões ao fundo](telas/22-configuracoes.png)
 
-## O que ele respeita {Regras}
-
-- **Não instala nada e não se conecta a nada.** É uma página aberta no navegador. Não há servidor, não há integração com sistema da empresa, não há envio de dado pra fora.
-- **Os dados ficam na máquina.** O histórico fica no armazenamento local do navegador e só sai quando o atendente exporta. Apagar é um botão.
-- **Ele reforça o procedimento, não substitui.** A validação de dados vem antes de tudo, o artigo a verbalizar está na orientação, o texto do registro segue o padrão. O sistema da empresa continua sendo o registro oficial: o SisGeral prepara o texto, quem registra lá é o atendente.
-- **Tudo é auditável.** Cada versão está no histórico de versões, cada registro tem data e hora, e a exportação em texto pode ser lida por qualquer pessoa.
-- **Guarda o mínimo.** Primeiro nome do beneficiário, protocolo e pedido. Dado sensível não precisa ficar guardado pra o sistema funcionar.
-
-![Histórico de versões, dentro do próprio sistema](telas/21-versoes.png)
-
-## O que deu {Resultados}
-
-- Registro de cancelamento: de texto digitado a um clique.
-- Atendimento: de 5 a 10 minutos pra menos de 5.
-- Procedimento seguido com apoio na tela, não de memória.
-- Histórico próprio, exportável, com painel de produtividade.
-- Mais de cinquenta versões em uso real, com os erros corrigidos no caminho.
-
-## Se fizer sentido pro time {Pro time}
-
-O que seria preciso, na ordem:
-
-1. **Validar as regras com quem decide**: o que pode ficar guardado localmente, por quanto tempo, e se o uso do navegador pra isso está dentro do permitido.
-2. **Revisar o catálogo com a qualidade**: os 98 procedimentos foram escritos por mim, da minha prática. Uma revisão de quem monitora garante que o texto base e a orientação são o padrão da operação.
-3. **Um arquivo por atendente**, com o nome configurado. Não precisa de instalação: é copiar a pasta. A que acompanha esta apresentação é a versão em uso, pra abrir e testar.
-4. **Uma hora de treinamento**: a rotina cabe em quatro cliques, e o resto é consulta.
-5. **Um ponto de retorno**: o que não está no catálogo vira pedido de procedimento novo, e eu mantenho.
-
-Nada disso depende de TI nem de compra. O custo é tempo de revisão. O ganho é minutos por atendimento, em cada atendimento, e um registro que sai igual pra todo mundo.
-
 ## Abrir e testar {Testar}
 
-A versão que abre aqui é de **homologação**: o mesmo sistema, com o catálogo reduzido a 24 procedimentos de exemplo, o ABC só com os nomes das especialidades e o diretório VDN com números de referência. Serve pra clicar, marcar procedimento, montar prontuário e ver o painel, sem expor nada da operação. Nada precisa ser instalado; o que você registrar fica só no seu navegador, e some com o **Apagar tudo** das configurações.
+A versão que abre aqui é de **homologação**: o mesmo sistema, com o catálogo reduzido a 12 procedimentos de exemplo, o ABC só com os nomes das especialidades e o diretório VDN com números de referência. Serve pra clicar, marcar procedimento, montar prontuário e ver o painel, sem expor nada da operação. Nada precisa ser instalado; o que você registrar fica só no seu navegador, e some com o **Apagar tudo** das configurações.
 
 <p><a class="abrir-sis" href="sisgeral/index.html" target="_blank" rel="noopener">Abrir o SisGeral (homologação) →</a></p>
 
-A versão completa, com os 98 procedimentos, o ABC com códigos e o VDN real, vai na pasta entregue à gestão e fica num repositório privado.
+A versão completa, com os 86 procedimentos, o ABC com códigos e o VDN real, vai na pasta entregue à gestão e fica num repositório privado.
 
 ## Contato
 
