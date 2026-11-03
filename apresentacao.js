@@ -35,8 +35,6 @@ Em números do meu posto, outubro de 2026:
 - **Tudo é auditável.** Cada versão está no histórico de versões, cada registro tem data e hora, e a exportação em texto pode ser lida por qualquer pessoa.
 - **Guarda o mínimo.** Primeiro nome do beneficiário, protocolo e pedido. Dado sensível não precisa ficar guardado pro sistema funcionar: não é guardado.
 
-![Histórico de versões, dentro do próprio sistema](telas/21-versoes.png)
-
 ## Versão de apresentação e versão em uso {Versões}
 
 O que abre nesta página, e o que está na pasta de teste, é a **homologação**: o mesmo sistema, com o catálogo reduzido aos procedimentos mais usados no dia a dia (cancelamento de plano, segunda via de boleto, abertura de RCA, liberação de guia, indicação de rede e afins, 12 ao todo), o ABC só com os nomes das especialidades e o VDN com números de referência. É uma base pra clicar, aprender o fluxo e entender como funciona, sem tocar em nada da operação. É provar o doce antes de servir.
@@ -134,6 +132,8 @@ As **configurações** cabem numa janela: nome padrão do atendente (o que vem p
 ![Configurações do sistema](telas/26-configuracoes.png)
 
 ![O mesmo sistema no tema claro, com a aba Versões ao fundo](telas/22-configuracoes.png)
+
+![Histórico de versões, dentro do próprio sistema](telas/21-versoes.png)
 
 ## Abrir e testar {Testar}
 
