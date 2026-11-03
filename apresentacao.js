@@ -7,9 +7,7 @@ window.SOBRE_MD = `
 
 <div class="destaques"><div><b>1 clique</b><span>registro de cancelamento, antes texto digitado</span></div><div><b>&lt; 5 min</b><span>atendimento, antes 5 a 10</span></div><div><b>86</b><span>procedimentos no catálogo, cada um com texto e orientação</span></div><div><b>v3.29</b><span>mais de cinquenta versões em uso real, com histórico dentro do sistema</span></div></div>
 
-Eu construí pra resolver um problema do meu próprio posto e uso todo dia. Esta página diz o que ele é, por que existe, o que respeita e o que seria preciso pra levar ao time, se fizer sentido. O detalhe de cada tela vem depois, pra quem quiser aprofundar. Tudo que aparece nas telas é a base de outubro, com nomes de beneficiários reduzidos ao primeiro nome. Qualquer tela abre ampliada com um clique; nas principais, os pontos numerados explicam cada parte.
-
-![A tela de trabalho: identificação, catálogo de procedimentos e o prontuário compilado](telas/01-novo-atendimento.png)
+Eu construí pra resolver um problema do meu próprio posto e uso todo dia. Esta página diz o que ele é, por que existe, o que respeita, a diferença entre a versão de teste e a que eu uso, e o que seria preciso pra levar ao time, se fizer sentido. O detalhe de cada tela vem depois, pra quem quiser aprofundar. Tudo que aparece nas telas é a base de outubro, com nomes de beneficiários reduzidos ao primeiro nome. As telas ficam na parte de detalhe; cada uma abre ampliada com um clique e, nas principais, os pontos numerados explicam cada parte.
 
 ## O problema {Problema}
 
@@ -39,6 +37,12 @@ Em números do meu posto, outubro de 2026:
 
 ![Histórico de versões, dentro do próprio sistema](telas/21-versoes.png)
 
+## Versão de apresentação e versão em uso {Versões}
+
+O que abre nesta página, e o que está na pasta de teste, é a **homologação**: o mesmo sistema, com o catálogo reduzido aos procedimentos mais usados no dia a dia (cancelamento de plano, segunda via de boleto, abertura de RCA, liberação de guia, indicação de rede e afins, 12 ao todo), o ABC só com os nomes das especialidades e o VDN com números de referência. É uma base pra clicar, aprender o fluxo e entender como funciona, sem tocar em nada da operação. É provar o doce antes de servir.
+
+A **versão em uso** é outra: 86 procedimentos escritos da minha prática, ABC com códigos, VDN real. Ela muda conforme eu uso, porque é ferramenta de trabalho, não produto fechado: o que eu acho certo hoje pode mudar amanhã, e o histórico de versões dentro do sistema registra cada mudança. Por isso a homologação não é um espelho da versão em uso, e não precisa ser. Ela é a base; o resto é o que a operação decidir que entra, se decidir.
+
 ## Se fizer sentido pro time {Pro time}
 
 O que seria preciso, na ordem:
@@ -54,6 +58,9 @@ Nada disso depende de TI nem de compra. O custo é tempo de revisão. O ganho é
 ## O que é, tela a tela {Telas}
 
 Daqui em diante é o detalhe. Um arquivo HTML com seis abas. As quatro primeiras são a rotina; as duas últimas, consulta.
+
+![A tela de trabalho: identificação, catálogo de procedimentos e o prontuário compilado](telas/01-novo-atendimento.png)
+
 
 - **Novo Atendimento**: identificação, catálogo de procedimentos e prontuário compilado.
 - **Histórico & Arquivo**: tudo que foi registrado, com filtros, exportação e importação em texto.
@@ -130,7 +137,7 @@ As **configurações** cabem numa janela: nome padrão do atendente (o que vem p
 
 ## Abrir e testar {Testar}
 
-A versão que abre aqui é de **homologação**: o mesmo sistema, com o catálogo reduzido a 12 procedimentos de exemplo, o ABC só com os nomes das especialidades e o diretório VDN com números de referência. Serve pra clicar, marcar procedimento, montar prontuário e ver o painel, sem expor nada da operação. Nada precisa ser instalado; o que você registrar fica só no seu navegador, e some com o **Apagar tudo** das configurações.
+A versão que abre aqui é a de **homologação** descrita acima. Serve pra clicar, marcar procedimento, montar prontuário e ver o painel, sem expor nada da operação. Nada precisa ser instalado; o que você registrar fica só no seu navegador, e some com o **Apagar tudo** das configurações.
 
 <p><a class="abrir-sis" href="sisgeral/index.html" target="_blank" rel="noopener">Abrir o SisGeral (homologação) →</a></p>
 
