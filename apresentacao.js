@@ -37,7 +37,7 @@ Em números do meu posto, outubro de 2026:
 
 ## Versão de apresentação e versão em uso {Versões}
 
-O que abre nesta página, e o que está na pasta de teste, é a **homologação**: o mesmo sistema, com o catálogo reduzido aos procedimentos mais usados no dia a dia (cancelamento de plano, segunda via de boleto, abertura de RCA, liberação de guia, indicação de rede e afins, 12 ao todo), o ABC só com os nomes das especialidades e o VDN com números de referência. É uma base pra clicar, aprender o fluxo e entender como funciona, sem tocar em nada da operação. É provar o doce antes de servir.
+O que abre nesta página, e o que está na pasta de teste, é a **homologação**: o mesmo sistema, com o catálogo reduzido aos procedimentos mais usados no dia a dia (cancelamento de plano, segunda via de boleto, abertura de RCA, liberação de guia, indicação de rede e afins, 12 ao todo), o ABC só com os nomes das especialidades e o VDN com números de referência. É uma base pra clicar, aprender o fluxo e entender como funciona, sem tocar em nada da operação.
 
 A **versão em uso** é outra: 86 procedimentos escritos da minha prática, ABC com códigos, VDN real. Ela muda conforme eu uso, porque é ferramenta de trabalho, não produto fechado: o que eu acho certo hoje pode mudar amanhã, e o histórico de versões dentro do sistema registra cada mudança. Por isso a homologação não é um espelho da versão em uso, e não precisa ser. Ela é a base; o resto é o que a operação decidir que entra, se decidir.
 
@@ -52,6 +52,8 @@ O que seria preciso, na ordem:
 5. **Um ponto de retorno**: o que não está no catálogo vira pedido de procedimento novo, e eu mantenho.
 
 Nada disso depende de TI nem de compra. O custo é tempo de revisão. O ganho é minutos por atendimento, em cada atendimento, e um registro que sai igual pra todo mundo.
+
+<p><a class="abrir-sis" href="sisgeral/index.html" target="_blank" rel="noopener">Abrir o SisGeral (homologação) →</a> <small>antes do detalhe, se quiser ver funcionando</small></p>
 
 ## O que é, tela a tela {Telas}
 

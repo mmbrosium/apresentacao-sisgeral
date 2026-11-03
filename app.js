@@ -246,7 +246,7 @@
     if ($("brand")) $("brand").textContent = autor.nome || "";
     $("s-nome").textContent = autor.nome || "";
     $("s-cargo").textContent = T(autor, "cargo") || "";
-    document.title = `${t("about")} · ${autor.nome || ""}`;
+    document.title = "SisGeral · apresentação";
     const slugOf = (s) => String(s).toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
     const r = new marked.Renderer();
     r.heading = function (text, level) {
@@ -277,7 +277,7 @@
     });
     if ($("topnav")) {
       $("topnav").innerHTML = `<a href="index.html" class="nav-ico" title="${t("home")}" aria-label="${t("home")}">⌂</a>`
-        + secs.map((s, i) => `<a href="#${esc(s.id)}" data-sec="${esc(s.id)}" class="${i === 0 ? "on" : ""}">${esc(s.titulo)}</a>`).join("");
+        + secs.map((s, i) => `<a href="#${esc(s.id)}" data-sec="${esc(s.id)}" class="${i === 0 ? "on" : ""}" style="--p:${secs.length > 1 ? Math.round(i / (secs.length - 1) * 100) : 0}">${esc(s.titulo)}</a>`).join("");
       const links = [...document.querySelectorAll("#topnav a[data-sec]")];
       let lock = 0;
       $("topnav").addEventListener("click", (e) => {

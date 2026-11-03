@@ -298,3 +298,7 @@ body.leaving .orn { animation: none; opacity: 0; transition: opacity .24s ease; 
 .md .tres > div { border: 1px solid var(--line); border-top: 2px solid var(--c); padding: 12px 14px; font-size: .95rem; line-height: 1.5; background: var(--panel); }
 .md .tres b { display: block; font-family: var(--font-display); font-weight: 600; font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--c); margin-bottom: 6px; }
 @media (max-width: 720px) { .md .tres { grid-template-columns: 1fr; } }
+
+/* Barra: do claro ao escuro conforme a leitura aprofunda (--p = 0 no resumo, 100 no fim) */
+.topnav a[data-sec] { color: color-mix(in srgb, var(--sistemas) calc(100% - var(--p, 0) * 0.6%), #5a5a5a); }
+.topnav a[data-sec].on, .topnav a[data-sec]:hover { color: var(--sistemas); border-bottom-color: var(--sistemas); }
